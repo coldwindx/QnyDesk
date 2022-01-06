@@ -1,0 +1,10 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build", // build任务
+            "type": "shell",
+            "command": "mingw32-make -f Makefile.Debug"
+        }
+    ]
+}
