@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>src/img/error.png</file>
+        <file>src/img/eye.png</file>
+        <file>src/img/favicon.ico</file>
+        <file>src/img/key.png</file>
+        <file>src/img/more.png</file>
+        <file>src/img/pen.png</file>
+        <file>src/img/tv.png</file>
+        <file>src/img/xun.png</file>
+    </qresource>
+</RCC>

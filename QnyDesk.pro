@@ -29,12 +29,17 @@ SOURCES += \
         MainWindow.cpp
 
 HEADERS += \
-        MainWindow.h
+        MainWindow.h \
+        button/SettingButton.h
 
 FORMS += \
-        MainWindow.ui
+        ui/MainWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    src.qrc \
+    css.qrc
