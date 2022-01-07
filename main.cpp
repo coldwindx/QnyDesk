@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
 void setDebugOutput(const QString &rawTargetFilePath_, const bool &argDateFlag_)
 {
     static QString rawTargetFilePath;

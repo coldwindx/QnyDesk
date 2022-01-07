@@ -33,7 +33,9 @@ SOURCES += \
 HEADERS += \
         MainWindow.h \
         button/SettingButton.h \
-        common/NetworkHandler.h
+        common/NetworkHandler.h \
+        common/DeviceInfo.h \
+        qny_passive/PassiveHandler.h
 
 FORMS += \
         ui/MainWindow.ui

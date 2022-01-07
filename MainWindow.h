@@ -4,8 +4,11 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QDebug>
+#include <QThread>
+#include <QSettings>
 #include "button/SettingButton.h"
-#include "common/NetworkHandler.h"
+#include "qny_passive/PassiveHandler.h"
+#include "common/DeviceInfo.h"
 
 namespace Ui {
     class MainWindow;
@@ -18,10 +21,16 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-private:
-    Ui::MainWindow *ui;
 private slots:
     void link();
+private:
+    Ui::MainWindow *ui;
+    PassiveHandler * passiveNetworkHander;  // 被控网络处理
+    DeviceInfo * deviceInfo;                // 设备信息
+
+    void loadSettings();
+    void startPassiveConnect();
+
 };
 
 #endif // MAINWINDOW_H

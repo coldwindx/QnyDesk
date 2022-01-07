@@ -11,7 +11,7 @@
           "type": "shell",
           "command": "qmake",
           "args": [
-            "../QnyDesk.pro"
+            "../${workspaceRootFolderName}.pro"
           ],
           "options": {
             "cwd": ".exe"
