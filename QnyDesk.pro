@@ -4,11 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = QnyDesk
+TARGET = QnyDesk 
+
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,13 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+
 SOURCES += \
         main.cpp \
         MainWindow.cpp
 
 HEADERS += \
         MainWindow.h \
-        button/SettingButton.h
+        button/SettingButton.h \
+        common/NetworkHandler.h
 
 FORMS += \
         ui/MainWindow.ui

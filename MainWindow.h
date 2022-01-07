@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include "button/SettingButton.h"
+#include "common/NetworkHandler.h"
 
 namespace Ui {
     class MainWindow;

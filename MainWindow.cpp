@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->connectBtn, &QPushButton::clicked, this, &MainWindow::link);
+
+    NetworkHandler * net = new NetworkHandler(this);
+    net->createSocket();
 }
 
 MainWindow::~MainWindow()
@@ -16,6 +19,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::link()
 {
-    QMessageBox::information(this, "Information", "This button is clicked!");
+    // QMessageBox::information(this, "Information", "This button is clicked!");
     qDebug() << "This button is clicked!";
 }
