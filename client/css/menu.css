@@ -1,12 +1,14 @@
-QMenu{
+QMenu {
     background-color: white;
     padding: 3px;
     border: 1px groove gray;
 }
-QMenu::item{
+
+QMenu::item {
     background-color: transparent;
 }
-QMenu::item:selected{
+
+QMenu::item:selected {
     background-color: rgb(234, 243, 253);
     color: black;
 }

@@ -10,11 +10,11 @@ class NetworkHandler : public QObject
 public:
     enum TransferType
     {
-        UNINIT, PASSIVE, ACTIVE
+        PASSIVE, ACTIVE
     };
     explicit NetworkHandler(QObject * parent = nullptr) : QObject(parent)
     {
-
+        this->type = PASSIVE;
     }
     ~NetworkHandler()
     {
@@ -23,9 +23,12 @@ public:
 
     void createSocket()
     {
-        if(UNINIT == type)
+        QString remoteHost = "localhost";
+        quint16 remotePort = 443;
+        if(deviceInfo != nullptr)
         {
-            qDebug() << "没有初始化！";
+            remoteHost = deviceInfo->getRemoteHost();
+            remotePort = deviceInfo->getRemotePort();
         }
         socket = new QTcpSocket(this);
         connect(socket, &QTcpSocket::connected, this, &NetworkHandler::handlerConnected);
@@ -43,10 +46,11 @@ public:
         this->deviceInfo = deviceInfo;
         this->type = type;
     }
+
 private:
     QTcpSocket * socket;
     DeviceInfo * deviceInfo;
-    TransferType type = UNINIT;
+    TransferType type;
 };
 
 #endif
