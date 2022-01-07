@@ -2,6 +2,7 @@
 #define NETWORK_HANDLER_H_
 #include <QObject>
 #include <QTcpSocket>
+#include <QTimer>
 #include "DeviceInfo.h"
 
 class NetworkHandler : public QObject
@@ -12,45 +13,26 @@ public:
     {
         PASSIVE, ACTIVE
     };
-    explicit NetworkHandler(QObject * parent = nullptr) : QObject(parent)
-    {
-        this->type = PASSIVE;
-    }
-    ~NetworkHandler()
-    {
+    explicit NetworkHandler(QObject * parent = nullptr);
+    ~NetworkHandler();
 
-    }
+    void createSocket();
 
-    void createSocket()
-    {
-        QString remoteHost = "localhost";
-        quint16 remotePort = 443;
-        if(deviceInfo != nullptr)
-        {
-            remoteHost = deviceInfo->getRemoteHost();
-            remotePort = deviceInfo->getRemotePort();
-        }
-        socket = new QTcpSocket(this);
-        connect(socket, &QTcpSocket::connected, this, &NetworkHandler::handlerConnected);
-        // connect
-        socket->connectToHost("www.baidu.com", 80);
-    }
+    void afterConnect();
 
-    void handlerConnected()
-    {
-        qDebug() << "connect success!";
-    }
+    void init(DeviceInfo * deviceInfo, TransferType type);
 
-    void init(DeviceInfo * deviceInfo, TransferType type)
-    {
-        this->deviceInfo = deviceInfo;
-        this->type = type;
-    }
-
+    void afterStateChange(QAbstractSocket::SocketState socketState);
+    
+    void reconnect();
+signals:
+    void connectStateChanged(bool flag);
 private:
     QTcpSocket * socket;
-    DeviceInfo * deviceInfo;
+    QString remoteHost = "localhost";   
+    quint16 remotePort = 443;
     TransferType type;
+    QTimer * timer;                     // 重连定时器
 };
 
 #endif

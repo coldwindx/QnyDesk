@@ -28,7 +28,8 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        MainWindow.cpp
+        MainWindow.cpp \
+        common/NetworkHandler.cpp
 
 HEADERS += \
         MainWindow.h \

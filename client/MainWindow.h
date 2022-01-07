@@ -30,6 +30,7 @@ private:
 
     void loadSettings();
     void startPassiveConnect();
+    void afterConnectStateChanged(bool flag);           // 连接成功后序操作
 
 };
 

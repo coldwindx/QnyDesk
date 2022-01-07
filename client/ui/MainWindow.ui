@@ -343,7 +343,7 @@ QPushButton#connectBtn::pressed{
          <property name="styleSheet">
           <string notr="true"/>
          </property>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="stateLamp">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -365,7 +365,7 @@ QPushButton#connectBtn::pressed{
            <string/>
           </property>
          </widget>
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="stateLabel">
           <property name="geometry">
            <rect>
             <x>50</x>
