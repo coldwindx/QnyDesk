@@ -18,9 +18,27 @@ void NetworkHandler::createSocket()
     // 当连接成功时，先stateChanged，后connected
     connect(socket, &QTcpSocket::connected, this, &NetworkHandler::afterConnect);
     connect(socket, &QTcpSocket::stateChanged, this, &NetworkHandler::afterStateChange);
+    connect(socket, &QTcpSocket::readyRead, this, &NetworkHandler::read);
     // connect
     socket->abort();
     socket->connectToHost(remoteHost, remotePort);
+}
+
+void NetworkHandler::removeSocket()
+{
+    qDebug() << "Start to remove socket!";
+    if(timer->isActive())
+        timer->stop();
+    // 不能delete timer，因为timer指定了Qt的父亲，可能会有问题
+    timer->deleteLater();
+    timer = Q_NULLPTR;
+    if(socket && QAbstractSocket::UnconnectedState != socket->state())
+        socket->close(); 
+    socket->disconnectFromHost();
+    socket->deleteLater();
+    socket = Q_NULLPTR;
+    qDebug() << "End to remove socket!";
+    emit finished();
 }
 
 void NetworkHandler::afterConnect()
@@ -47,7 +65,8 @@ void NetworkHandler::afterStateChange(QAbstractSocket::SocketState socketState)
         // 发送连接失败信号
         emit connectStateChanged(false);
         // 启动重连定时器
-        if(!timer->isActive())
+        // 程序退出时，这里会接收到信号，此时timer已经释放，需要提前判断timer
+        if(timer && !timer->isActive())
             timer->start(5000);
         return ;
     }
@@ -66,15 +85,23 @@ void NetworkHandler::afterStateChange(QAbstractSocket::SocketState socketState)
         emit connectStateChanged(true);
         return ;
     }
+    // 连接关闭
+    if(QAbstractSocket::ClosingState == socketState)
+    {
+        emit connectStateChanged(false);
+        // 启动重连定时器
+        if(!timer->isActive())
+            timer->start(5000);
+        return ;
+    }
 }
 
     
 void NetworkHandler::reconnect()
 {
+    qDebug() << "Start to reconnect server!";
     if(socket->state() == QAbstractSocket::ConnectedState)
     {
-        qDebug() << "Success to connect remote server!";
-        qDebug() << "Stop to reconnect!";
         return timer->stop();
     }
     if(socket->state() == QAbstractSocket::ConnectingState)
@@ -82,4 +109,18 @@ void NetworkHandler::reconnect()
         socket->abort();
         return socket->connectToHost(remoteHost, remotePort);
     }
+    if(socket->state() == QAbstractSocket::UnconnectedState)
+    {
+        socket->abort();
+        return socket->connectToHost(remoteHost, remotePort);
+    }
+    qDebug() << "Unexpected socket state!";
+}
+
+void NetworkHandler::read()
+{
+    qDebug() << "Start to read data from socket!";
+    QByteArray array = socket->readAll();
+    qDebug() << array;
+    qDebug() << "Stop to read data!";
 }

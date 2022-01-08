@@ -18,6 +18,8 @@ public:
 
     void createSocket();
 
+    void removeSocket();
+
     void afterConnect();
 
     void init(DeviceInfo * deviceInfo, TransferType type);
@@ -25,8 +27,11 @@ public:
     void afterStateChange(QAbstractSocket::SocketState socketState);
     
     void reconnect();
+
+    void read();                    // 从网络套接字读取数据
 signals:
     void connectStateChanged(bool flag);
+    void finished();
 private:
     QTcpSocket * socket;
     QString remoteHost = "localhost";   

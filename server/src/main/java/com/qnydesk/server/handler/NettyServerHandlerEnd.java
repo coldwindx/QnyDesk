@@ -1,8 +1,10 @@
 package com.qnydesk.server.handler;
 
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,12 @@ public class NettyServerHandlerEnd extends ChannelInboundHandlerAdapter {
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception{
-        logger.info(ctx.channel().remoteAddress() + "网络连接上" + ctx.channel().id().asLongText());
+        ctx.channel().writeAndFlush(Unpooled.copiedBuffer("Hello!", CharsetUtil.UTF_8));        // 向客户端发送信息
+    }
+
+    @Override
+    public  void channelRead(ChannelHandlerContext ctx, Object msg) throws  Exception{
+        // 接收到客户端信息
+        logger.info("Client: {}", msg.toString());
     }
 }

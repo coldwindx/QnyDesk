@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 {
     setDebugOutput("./debug.log");
     QApplication a(argc, argv);
+    a.setQuitOnLastWindowClosed(false);     // 主窗口关闭，程序不退出
     MainWindow w;
     w.show();
 
