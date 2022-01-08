@@ -3,7 +3,6 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QTimer>
-#include "DeviceInfo.h"
 
 class NetworkHandler : public QObject
 {
@@ -13,18 +12,17 @@ public:
     {
         PASSIVE, ACTIVE
     };
-    explicit NetworkHandler(QObject * parent = nullptr);
+
+    explicit NetworkHandler(const QString & host, quint16 port, TransferType type = ACTIVE, QObject * parent = nullptr);
     ~NetworkHandler();
 
     void createSocket();
 
     void removeSocket();
 
-    void afterConnect();
+    void connectedEvent();
 
-    void init(DeviceInfo * deviceInfo, TransferType type);
-
-    void afterStateChange(QAbstractSocket::SocketState socketState);
+    void stateChangedEvent(QAbstractSocket::SocketState socketState);
     
     void reconnect();
 
@@ -34,8 +32,8 @@ signals:
     void finished();
 private:
     QTcpSocket * socket;
-    QString remoteHost = "localhost";   
-    quint16 remotePort = 443;
+    QString host;   
+    quint16 port;
     TransferType type;
     QTimer * timer;                     // 重连定时器
 };

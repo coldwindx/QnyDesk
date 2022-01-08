@@ -24,20 +24,20 @@ public:
     ~MainWindow();
 public slots:
     void link();
-    void afterTrigger(QAction * action);
 signals:
     void closed();
 private:
     Ui::MainWindow *ui;
+
+    QThread * thread;                       // 处理网络连接的线程          
     PassiveHandler * passiveNetworkHander;  // 被控网络处理
     DeviceInfo * deviceInfo;                // 设备信息
-    QSystemTrayIcon * trayIcon;             // 托盘
-    QMenu * trayMenu;                       // 托盘菜单
-
+    QSystemTrayIcon * tray;                 // 托盘
 
     void setTrayMenu();                                 // 设置系统托盘
-    void loadSettings();
-    void startPassiveConnect();
+    void loadSettings();                                // 加载配置信息
+    void startPassiveConnect();                         // 连接远端服务器
+    void quit();                                        // 程序退出
 
     void afterConnectStateChanged(bool flag);           // 连接成功后序操作
     void afterSocketFinish();

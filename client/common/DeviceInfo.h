@@ -7,21 +7,21 @@ class DeviceInfo : public QObject
 {
     Q_OBJECT
 public:
-    explicit DeviceInfo(QObject * parent = nullptr) : QObject(parent) {}
-    ~DeviceInfo() {}
-
-    void setRemoteInfo(const QString & host, quint16 port)
+    // explicit DeviceInfo(QObject * parent = nullptr) : QObject(parent) {}
+    explicit DeviceInfo(const QString & host, quint16 port, QObject * parent = nullptr) : QObject(parent) 
     {
         this->host = host;
         this->port = port;
     }
 
-    QString getRemoteHost()
+    ~DeviceInfo() {}
+    
+    QString getHost()
     {
         return host;
     }
 
-    quint16 getRemotePort()
+    quint16 getPort()
     {
         return port;
     } 

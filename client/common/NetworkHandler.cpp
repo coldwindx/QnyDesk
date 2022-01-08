@@ -1,8 +1,12 @@
 #include "NetworkHandler.h"
 
-NetworkHandler::NetworkHandler(QObject * parent) : QObject(parent)
+NetworkHandler::NetworkHandler(const QString & host, quint16 port, TransferType type, QObject * parent)
+    : QObject(parent)
 {
-    this->type = ACTIVE;
+    this->host = host;
+    this->port = port;
+    this->type = type;
+    // 重连定时器
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &NetworkHandler::reconnect);
 }
@@ -16,52 +20,49 @@ void NetworkHandler::createSocket()
 {
     socket = new QTcpSocket(this);
     // 当连接成功时，先stateChanged，后connected
-    connect(socket, &QTcpSocket::connected, this, &NetworkHandler::afterConnect);
-    connect(socket, &QTcpSocket::stateChanged, this, &NetworkHandler::afterStateChange);
+    // connect(socket, &QTcpSocket::connected, this, &NetworkHandler::connectedEvent);
+    // <1> 监听连接状态
+    connect(socket, &QTcpSocket::stateChanged, this, &NetworkHandler::stateChangedEvent);
+    // <2> 读取消息
     connect(socket, &QTcpSocket::readyRead, this, &NetworkHandler::read);
     // connect
     socket->abort();
-    socket->connectToHost(remoteHost, remotePort);
+    socket->connectToHost(host, port);
 }
 
 void NetworkHandler::removeSocket()
 {
     qDebug() << "Start to remove socket!";
-    if(timer->isActive())
-        timer->stop();
-    // 不能delete timer，因为timer指定了Qt的父亲，可能会有问题
-    timer->deleteLater();
-    timer = Q_NULLPTR;
-    if(socket && QAbstractSocket::UnconnectedState != socket->state())
-        socket->close(); 
-    socket->disconnectFromHost();
-    socket->deleteLater();
-    socket = Q_NULLPTR;
+    if(timer)
+    {
+        if(timer->isActive())
+            timer->stop();
+        timer->deleteLater();   // 不能delete timer，因为timer指定了Qt的父亲，可能会有问题
+        timer = Q_NULLPTR;
+    }
+    if(socket)
+    {
+        if(QAbstractSocket::UnconnectedState != socket->state())
+            socket->close(); 
+        socket->disconnectFromHost();
+        socket->deleteLater();
+        socket = Q_NULLPTR;
+    }
     qDebug() << "End to remove socket!";
     emit finished();
 }
 
-void NetworkHandler::afterConnect()
+void NetworkHandler::connectedEvent()
 {
     qDebug() << "connect success!";
 }
 
-void NetworkHandler::init(DeviceInfo * deviceInfo, TransferType type)
-{
-    if(deviceInfo != nullptr)
-    {
-        remoteHost = deviceInfo->getRemoteHost();
-        remotePort = deviceInfo->getRemotePort();
-    }
-    this->type = type;
-}
-
-void NetworkHandler::afterStateChange(QAbstractSocket::SocketState socketState)
+void NetworkHandler::stateChangedEvent(QAbstractSocket::SocketState socketState)
 {
     // 一般服务器没有开转这个状态
     if(QAbstractSocket::UnconnectedState == socketState)
     {
-        qDebug() << "Fail to connect remote server[" << remoteHost << ":" << remotePort << "]!";
+        qDebug() << "Fail to connect remote server[" << host << ":" << port << "]!";
         // 发送连接失败信号
         emit connectStateChanged(false);
         // 启动重连定时器
@@ -73,7 +74,7 @@ void NetworkHandler::afterStateChange(QAbstractSocket::SocketState socketState)
     // 一般服务器开启连接端口号没有开转这个状态
     if(QAbstractSocket::ConnectingState == socketState)
     {
-        qDebug() << "Try to connect remote server[" << remoteHost << ":" << remotePort << "]!";
+        qDebug() << "Try to connect remote server[" << host << ":" << port << "]!";
         // 启动重连定时器
         if(!timer->isActive())
             timer->start(5000);
@@ -107,12 +108,12 @@ void NetworkHandler::reconnect()
     if(socket->state() == QAbstractSocket::ConnectingState)
     {
         socket->abort();
-        return socket->connectToHost(remoteHost, remotePort);
+        return socket->connectToHost(host, port);
     }
     if(socket->state() == QAbstractSocket::UnconnectedState)
     {
         socket->abort();
-        return socket->connectToHost(remoteHost, remotePort);
+        return socket->connectToHost(host, port);
     }
     qDebug() << "Unexpected socket state!";
 }

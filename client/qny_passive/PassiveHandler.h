@@ -6,7 +6,8 @@ class PassiveHandler : public NetworkHandler
 {
     Q_OBJECT
 public:
-    explicit PassiveHandler(QObject * parent = nullptr) : NetworkHandler(parent)
+    explicit PassiveHandler(const QString & host, quint16 port, QObject * parent = nullptr) 
+        : NetworkHandler(host, port, NetworkHandler::PASSIVE, parent)
     {
         
     }
