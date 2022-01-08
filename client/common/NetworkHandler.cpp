@@ -24,7 +24,9 @@ void NetworkHandler::createSocket()
     // <1> 监听连接状态
     connect(socket, &QTcpSocket::stateChanged, this, &NetworkHandler::stateChangedEvent);
     // <2> 读取消息
-    connect(socket, &QTcpSocket::readyRead, this, &NetworkHandler::read);
+    connect(socket, &QTcpSocket::readyRead, this, &NetworkHandler::readEvent);
+    // <3> 错误信息处理
+    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(errorEvent(QAbstractSocket::SocketError)));
     // connect
     socket->abort();
     socket->connectToHost(host, port);
@@ -118,10 +120,15 @@ void NetworkHandler::reconnect()
     qDebug() << "Unexpected socket state!";
 }
 
-void NetworkHandler::read()
+void NetworkHandler::readEvent()
 {
     qDebug() << "Start to read data from socket!";
     QByteArray array = socket->readAll();
     qDebug() << array;
     qDebug() << "Stop to read data!";
+}
+
+void NetworkHandler::errorEvent(QAbstractSocket::SocketError error)
+{
+    qDebug() << "Socket Error:" << socket->errorString();
 }

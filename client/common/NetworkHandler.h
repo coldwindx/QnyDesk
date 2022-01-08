@@ -26,7 +26,9 @@ public:
     
     void reconnect();
 
-    void read();                    // 从网络套接字读取数据
+    void readEvent();                               // 从网络套接字读取数据
+
+    void errorEvent(QAbstractSocket::SocketError socketError);       // 错误消息处理
 signals:
     void connectStateChanged(bool flag);
     void finished();
