@@ -30,7 +30,7 @@ message WMHeartBeat{
 
 message CsHostInfo{
     string cpuId = 1;
-    string deviceId = 2;
+    string deviceId = 2;        // 硬盘ID
     string macAddress = 3;
     int32 active = 4;
 }

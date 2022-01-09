@@ -77,11 +77,12 @@ void MainWindow::startPassiveConnect()
     // 连接成功
     connect(passiveNetworkHander, &PassiveHandler::connectStateChanged, this, &MainWindow::afterConnectStateChanged);
     // 窗口关闭
-    // <1> 关闭socket连接
+    //      <1> 关闭socket连接
     connect(this, &MainWindow::closed, passiveNetworkHander, &PassiveHandler::removeSocket);
-    // <2> socket连接关闭后，执行后续处理
+    //      <2> socket连接关闭后，执行后续处理
     connect(passiveNetworkHander, &PassiveHandler::finished, this, &MainWindow::quit);
-
+    // 被控网络登记注册成功
+    connect(passiveNetworkHander, &PassiveHandler::registered, this, &MainWindow::registerEvent);
     passiveNetworkHander->moveToThread(thread);
     thread->start();
 }
@@ -112,4 +113,11 @@ void MainWindow::afterSocketFinish()
     passiveNetworkHander = Q_NULLPTR;
     if(!passiveNetworkHander)
         QApplication::quit();       // 退出程序
+}
+
+void MainWindow::registerEvent(QString id)
+{
+    id = id.mid(0, 3) + " " + id.mid(3, 3) + " " + id.mid(6, 3);
+    ui->idLabel->setText(id);
+    ui->connectBtn->setEnabled(true);
 }

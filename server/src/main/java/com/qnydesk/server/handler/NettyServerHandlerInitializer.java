@@ -1,12 +1,14 @@
 package com.qnydesk.server.handler;
 
 import com.qnydesk.codec.ProtobufFixed32FrameDecoderRedefine;
+import com.qnydesk.codec.ProtobufFixed32LengthFieldPrependerRedefine;
 import com.qnydesk.dispatcher.MessageDispatcher;
 import com.qnydesk.protocol.BigPack;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,9 @@ public class NettyServerHandlerInitializer extends ChannelInitializer<Channel> {
                 // 入站，处理粘包拆包
                 .addLast(new ProtobufFixed32FrameDecoderRedefine())
                 .addLast("ExchangeProtobufDecoder", new ProtobufDecoder(BigPack.Exchange.getDefaultInstance()))
+                // 出站
+                .addLast(new ProtobufFixed32LengthFieldPrependerRedefine())
+                .addLast(new ProtobufEncoder())
                 .addLast(messageDispatcher)     // 消息分发器
                 .addLast(nettyServerHandlerEnd);
     }

@@ -115,6 +115,8 @@
         <property name="font">
          <font>
           <pointsize>11</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -124,15 +126,15 @@
        <widget class="QLabel" name="idLabel">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>50</y>
-          <width>181</width>
-          <height>16</height>
+          <x>24</x>
+          <y>39</y>
+          <width>180</width>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <pointsize>11</pointsize>
+          <pointsize>13</pointsize>
          </font>
         </property>
         <property name="text">
@@ -192,13 +194,15 @@ QPushButton::menu-indicator{
          <rect>
           <x>20</x>
           <y>0</y>
-          <width>72</width>
+          <width>101</width>
           <height>31</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <pointsize>11</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -359,6 +363,9 @@ QPushButton::menu-indicator{
            </property>
           </widget>
           <widget class="QPushButton" name="connectBtn">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="geometry">
             <rect>
              <x>270</x>

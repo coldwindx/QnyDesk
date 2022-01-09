@@ -1,5 +1,6 @@
 package com.qnydesk.server.handler;
 
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -25,5 +26,12 @@ public class NettyServerHandlerEnd extends ChannelInboundHandlerAdapter {
     public  void channelRead(ChannelHandlerContext ctx, Object msg) throws  Exception{
         // 接收到客户端信息
         logger.info("Client: {}", msg.toString());
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception{
+        logger.info(ctx.channel().remoteAddress() + "网络已断开！");
+        nettyChannelManager.remove(ctx.channel());
+        ctx.close();
     }
 }

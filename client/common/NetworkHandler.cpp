@@ -25,7 +25,7 @@ void NetworkHandler::createSocket()
     // <2> 读取消息
     connect(socket, &QTcpSocket::readyRead, this, &NetworkHandler::readEvent);
     // <3> 错误信息处理
-    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(NetworkHandler::errorEvent(QAbstractSocket::SocketError)));
+    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(errorEvent(QAbstractSocket::SocketError)));
     // connect
     socket->abort();
     socket->connectToHost(device->getHost(), device->getPort());
@@ -64,12 +64,18 @@ QByteArray NetworkHandler::intToBytes(int n)
     return buf;
 }
 
+int NetworkHandler::bytesToInt(const QByteArray & b)
+{
+    return b[3] & 0xff | (b[2] & 0xff) << 8 | (b[1] & 0xff) << 16 | (b[0] & 0xff) << 24;
+}
+
 void NetworkHandler::connectedEvent()
 {
     // 发送设备信息给服务器
     // <1> 设备信息
     BigPack::CsHostInfo * info = new BigPack::CsHostInfo();
     QString hash = DeviceInfo::hash(device->platformCpuId(), device->macAddress());
+    info->set_deviceid(device->diskDeviceID().toStdString());
     info->set_cpuid(hash.toStdString());        // 使用C++标准string
     info->set_macaddress(device->macAddress().toStdString());
     info->set_active(this->type);
@@ -170,10 +176,31 @@ void NetworkHandler::reconnect()
 
 void NetworkHandler::readEvent()
 {
-    qDebug() << "Start to read data from socket!";
-    QByteArray array = socket->readAll();
-    qDebug() << array;
-    qDebug() << "Stop to read data!";
+    if(socket->bytesAvailable() < 0) return;
+    QByteArray msg = socket->readAll();
+    // 先读4个byte的头信息
+    buffer.append(msg);
+    int bufferSize = buffer.size();
+    int bodyLen = 0;
+
+    while(bufferSize)
+    {
+        // <1> 处理粘包和拆包
+        if(bufferSize < sizeof(quint32))       
+            break;
+        bodyLen = bytesToInt(buffer);
+        if(bufferSize < sizeof(quint32) + bodyLen)
+            break;
+        QByteArray exBuf = buffer.mid(sizeof(quint32), bodyLen);
+        // <2> 反序列化
+        BigPack::Exchange ex;
+        ex.ParseFromString(exBuf.toStdString());
+        // <3> 处理协议
+        this->dealProto(ex.type(), ex);
+        // <4> 更新数据
+        buffer = buffer.right(bufferSize - sizeof(quint32) - bodyLen);
+        bufferSize = buffer.size();
+    }
 }
 
 void NetworkHandler::errorEvent(QAbstractSocket::SocketError error)

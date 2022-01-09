@@ -3,12 +3,24 @@
 #include <QDateTime>
 #include <QFileInfo>
 #include <QDir>
-#include "common/Logger.h"
+#include <Windows.h>
 #include <QDebug>
-void setDebugOutput(const QString &rawTargetFilePath_, const bool &argDateFlag_ = false);
+#include "common/Logger.h"
+
+#ifdef Q_OS_WIN
+// 单一实例
+bool isAlreadyRun()
+{
+    HANDLE hMutex = ::CreateMutexA(nullptr, FALSE, "TEST");
+    return hMutex && ERROR_ALREADY_EXISTS == ::GetLastError();
+}
+#endif
+
 int main(int argc, char *argv[])
 {
-    // setDebugOutput("./debug.log");
+#ifdef Q_OS_WIN
+    if(isAlreadyRun()) return 0;
+#endif
     GOOGLE_PROTOBUF_VERIFY_VERSION;         // 启用protobuf
     Logger::useLog(Logger::FILE);
     QApplication a(argc, argv);
