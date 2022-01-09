@@ -1,0 +1,1 @@
+## Qt使用protocol需要在.pro中动态添加库

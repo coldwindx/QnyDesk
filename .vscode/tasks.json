@@ -11,7 +11,11 @@
       "type": "shell",
       "command": "qmake",
       "args": [
-        "${workspaceFolder}/client/${workspaceRootFolderName}.pro"
+        "${workspaceFolder}/client/${workspaceRootFolderName}.pro",
+        "-spec",
+        "win32-g++",
+        "'CONFIG+=debug'",
+        "'CONFIG+=qml_debug'"
       ],
       "options": {
         "cwd": ".exe"
@@ -22,8 +26,7 @@
       "type": "shell",
       "command": "make",
       "args": [
-        "-f",
-        "Makefile.Debug"
+        "-j8"
       ],
       "options": {
         "cwd": ".exe"
@@ -46,15 +49,5 @@
       ],
       "dependsOrder": "sequence"
     }
-    //   {
-    //     "label": "Clean build",
-    //     "dependsOn": [
-    //       "Clear build folder",
-    //       "Create build dir",
-    //       "Run qmake",
-    //       "Run make"
-    //     ],
-    //     "dependsOrder": "sequence"
-    //   }
   ]
 }

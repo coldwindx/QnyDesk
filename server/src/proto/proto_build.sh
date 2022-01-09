@@ -1,0 +1,2 @@
+protoc.exe --java_out=E:\GithubSpace\QnyDesk\server\src\main\java --proto_path=E:\GithubSpace\QnyDesk\server\src\proto Exchange.proto
+protoc.exe --cpp_out=E:\GithubSpace\QnyDesk\client\protocol --proto_path=E:\GithubSpace\QnyDesk\server\src\proto Exchange.proto

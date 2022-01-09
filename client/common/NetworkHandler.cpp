@@ -1,10 +1,9 @@
 #include "NetworkHandler.h"
 
-NetworkHandler::NetworkHandler(const QString & host, quint16 port, TransferType type, QObject * parent)
+NetworkHandler::NetworkHandler(DeviceInfo * device, TransferType type, QObject * parent)
     : QObject(parent)
 {
-    this->host = host;
-    this->port = port;
+    this->device = device;
     this->type = type;
     // 重连定时器
     timer = new QTimer(this);
@@ -20,16 +19,16 @@ void NetworkHandler::createSocket()
 {
     socket = new QTcpSocket(this);
     // 当连接成功时，先stateChanged，后connected
-    // connect(socket, &QTcpSocket::connected, this, &NetworkHandler::connectedEvent);
+     connect(socket, &QTcpSocket::connected, this, &NetworkHandler::connectedEvent);
     // <1> 监听连接状态
     connect(socket, &QTcpSocket::stateChanged, this, &NetworkHandler::stateChangedEvent);
     // <2> 读取消息
     connect(socket, &QTcpSocket::readyRead, this, &NetworkHandler::readEvent);
     // <3> 错误信息处理
-    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(errorEvent(QAbstractSocket::SocketError)));
+    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(NetworkHandler::errorEvent(QAbstractSocket::SocketError)));
     // connect
     socket->abort();
-    socket->connectToHost(host, port);
+    socket->connectToHost(device->getHost(), device->getPort());
 }
 
 void NetworkHandler::removeSocket()
@@ -56,7 +55,27 @@ void NetworkHandler::removeSocket()
 
 void NetworkHandler::connectedEvent()
 {
-    qDebug() << "connect success!";
+    // 发送设备信息给服务器
+    // <1> 设备信息
+    BigPack::CsHostInfo * info = new BigPack::CsHostInfo();
+    QString hash = DeviceInfo::hash(device->platformCpuId(), device->macAddress());
+    info->set_cpuid(hash.toStdString());        // 使用C++标准string
+    info->set_macaddress(device->macAddress().toStdString());
+    info->set_active(this->type);
+    // <2> 消息体
+    BigPack::Exchange ex;
+    ex.set_type(BigPack::Exchange::TypeRegisterHost);
+    ex.set_allocated_hostinfo(info);
+    // <3> 序列化
+    std::string msg;
+    ex.SerializeToString(&msg);
+    // <4> 发送数据
+    int ok = socket->write(msg.c_str(), ex.ByteSizeLong());
+    socket->flush();
+    if(-1 == ok)
+    {
+        qDebug() << "Fail to send data to server!";
+    }
 }
 
 void NetworkHandler::stateChangedEvent(QAbstractSocket::SocketState socketState)
@@ -64,19 +83,19 @@ void NetworkHandler::stateChangedEvent(QAbstractSocket::SocketState socketState)
     // 一般服务器没有开转这个状态
     if(QAbstractSocket::UnconnectedState == socketState)
     {
-        qDebug() << "Fail to connect remote server[" << host << ":" << port << "]!";
+        qDebug() << "Can not connect to remote server!";
         // 发送连接失败信号
         emit connectStateChanged(false);
         // 启动重连定时器
         // 程序退出时，这里会接收到信号，此时timer已经释放，需要提前判断timer
         if(timer && !timer->isActive())
             timer->start(5000);
+        qDebug() << "Activate timer to reconnect!";
         return ;
     }
     // 一般服务器开启连接端口号没有开转这个状态
     if(QAbstractSocket::ConnectingState == socketState)
     {
-        qDebug() << "Try to connect remote server[" << host << ":" << port << "]!";
         // 启动重连定时器
         if(!timer->isActive())
             timer->start(5000);
@@ -110,12 +129,12 @@ void NetworkHandler::reconnect()
     if(socket->state() == QAbstractSocket::ConnectingState)
     {
         socket->abort();
-        return socket->connectToHost(host, port);
+        return socket->connectToHost(device->getHost(), device->getPort());
     }
     if(socket->state() == QAbstractSocket::UnconnectedState)
     {
         socket->abort();
-        return socket->connectToHost(host, port);
+        return socket->connectToHost(device->getHost(), device->getPort());
     }
     qDebug() << "Unexpected socket state!";
 }

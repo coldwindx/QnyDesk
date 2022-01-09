@@ -8,12 +8,14 @@ void setDebugOutput(const QString &rawTargetFilePath_, const bool &argDateFlag_ 
 int main(int argc, char *argv[])
 {
     setDebugOutput("./debug.log");
+    GOOGLE_PROTOBUF_VERIFY_VERSION;         // 启用protobuf
     QApplication a(argc, argv);
     a.setQuitOnLastWindowClosed(false);     // 主窗口关闭，程序不退出
     MainWindow w;
     w.show();
-
-    return a.exec();
+    int ret = a.exec();
+    google::protobuf::ShutdownProtobufLibrary();    // 关闭所有protobuf的lib库
+    return ret;
 }
 
 void setDebugOutput(const QString &rawTargetFilePath_, const bool &argDateFlag_)

@@ -3,6 +3,9 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QTimer>
+#include <QCryptographicHash>
+#include "protocol/Exchange.pb.h"
+#include "DeviceInfo.h"
 
 class NetworkHandler : public QObject
 {
@@ -13,7 +16,7 @@ public:
         PASSIVE, ACTIVE
     };
 
-    explicit NetworkHandler(const QString & host, quint16 port, TransferType type = ACTIVE, QObject * parent = nullptr);
+    explicit NetworkHandler(DeviceInfo * device, TransferType type = ACTIVE, QObject * parent = nullptr);
     ~NetworkHandler();
 
     void createSocket();
@@ -26,18 +29,17 @@ public:
     
     void reconnect();
 
-    void readEvent();                               // 从网络套接字读取数据
+    void readEvent();                                               // 从网络套接字读取数据
 
-    void errorEvent(QAbstractSocket::SocketError socketError);       // 错误消息处理
+    void errorEvent(QAbstractSocket::SocketError socketError);      // 错误消息处理
 signals:
     void connectStateChanged(bool flag);
     void finished();
 private:
     QTcpSocket * socket;
-    QString host;   
-    quint16 port;
     TransferType type;
-    QTimer * timer;                     // 重连定时器
+    DeviceInfo * device;
+    QTimer * timer;                         // 重连定时器
 };
 
 #endif

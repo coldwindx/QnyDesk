@@ -29,14 +29,18 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         MainWindow.cpp \
-        common/NetworkHandler.cpp
+        common/DeviceInfo.cpp \
+        common/NetworkHandler.cpp \
+        protocol/Exchange.pb.cc 
 
 HEADERS += \
         MainWindow.h \
         button/SettingButton.h \
         common/NetworkHandler.h \
         common/DeviceInfo.h \
-        qny_passive/PassiveHandler.h
+        qny_passive/PassiveHandler.h \
+        protocol/Exchange.pb.h \
+        button/PasswordButton.h
 
 FORMS += \
         ui/MainWindow.ui
@@ -49,3 +53,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     src.qrc \
     css.qrc
+
+win32: LIBS += -LD:/CTools/protobuf/lib/ -llibprotobuf.dll
+INCLUDEPATH += D:/CTools/protobuf/include
+DEPENDPATH += D:/CTools/protobuf

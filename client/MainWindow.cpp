@@ -65,17 +65,19 @@ void MainWindow::loadSettings()
     settings.endGroup();
     settings.sync();
     // 保存设备信息
-    deviceInfo = new DeviceInfo(remoteHost, remotePort, this);
+    device = new DeviceInfo(remoteHost, remotePort, this);
 }
 
 void MainWindow::startPassiveConnect()
 {
     this->thread = new QThread();
-    passiveNetworkHander = new PassiveHandler(deviceInfo->getHost(), deviceInfo->getPort());
+    passiveNetworkHander = new PassiveHandler(device);
     // 线程启动时，开始处理
     connect(thread, &QThread::started, passiveNetworkHander, &PassiveHandler::createSocket);
     // 连接成功
     connect(passiveNetworkHander, &PassiveHandler::connectStateChanged, this, &MainWindow::afterConnectStateChanged);
+//    connect(passiveNetworkHander, &PassiveHandler::connected, this, &MainWindow::afterConnectStateChanged);
+    
     // 窗口关闭
     // <1> 关闭socket连接
     connect(this, &MainWindow::closed, passiveNetworkHander, &PassiveHandler::removeSocket);
@@ -89,6 +91,8 @@ void MainWindow::startPassiveConnect()
 void MainWindow::quit()
 {
     passiveNetworkHander->deleteLater();
+    thread->quit();
+    thread->wait();
     thread->deleteLater();
     QApplication::quit();       // 退出程序
 }

@@ -5,7 +5,8 @@
       "includePath": [
         "${workspaceFolder}/**",
         "D:/CTools/Qt/Qt5.9.8/5.9.8/mingw53_32/include/**",
-        "D:/CTools/Qt/Qt5.9.8/5.9.8/mingw53_32/include/QtNetwork"
+        "D:/CTools/Qt/Qt5.9.8/5.9.8/mingw53_32/include/QtNetwork",
+        "D:/CTools/protobuf/include/*"
       ],
       "defines": [
         "_DEBUG",

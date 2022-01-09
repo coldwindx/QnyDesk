@@ -31,7 +31,7 @@ private:
 
     QThread * thread;                       // 处理网络连接的线程          
     PassiveHandler * passiveNetworkHander;  // 被控网络处理
-    DeviceInfo * deviceInfo;                // 设备信息
+    DeviceInfo * device;                    // 设备信息
     QSystemTrayIcon * tray;                 // 托盘
 
     void setTrayMenu();                                 // 设置系统托盘

@@ -6,7 +6,6 @@
 #include <QMenu>
 #include <QAction>
 #include <QFile>
-#include <QMessageBox>
 
 class SettingButton : public QPushButton
 {
@@ -30,9 +29,6 @@ public:
             menu->setStyleSheet(file.readAll());
             file.close();
         }
-            else{
-                QMessageBox::information(this, "","");
-            }
         this->setMenu(menu);
     }
     ~SettingButton() {}

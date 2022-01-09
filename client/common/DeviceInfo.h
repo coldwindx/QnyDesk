@@ -22,6 +22,8 @@ public:
     QString diskDeviceID();
     // 获取平台CPU的ID
     QString platformCpuId();
+
+    static QString hash(const QString & str1, const QString & str2);
 private:
     QString host;
     quint16 port;

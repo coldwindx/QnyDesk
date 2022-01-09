@@ -1,0 +1,41 @@
+syntax = "proto3";
+package BigPack;                // Java的类名，C++的命名空间
+
+option optimize_for = SPEED;    // 加快解析
+option java_package = "com.qnydesk.protocol";
+option java_outer_classname = "BigPack";
+// C++的头文件名取第一个message名
+message Exchange {
+    enum DataType{
+        TypeHeartBeat = 0;              // 心跳
+        TypeRegisterHost = 1;           // 注册主机信息
+        TypeReplyRegisterDetails = 2;   // 回复注册
+    }
+
+    DataType type = 1;
+    string resourceId = 2;
+    string targetId = 3;
+    int32 errorCode = 4;
+
+    // 相当于C的union
+    oneof dataBody{
+        CsHostInfo hostInfo = 5;
+        ScReplyInfo replyInfo = 6;
+    }
+}
+
+message WMHeartBeat{
+
+}
+
+message CsHostInfo{
+    string cpuId = 1;
+    string deviceId = 2;
+    string macAddress = 3;
+    bool active = 4;
+}
+
+message ScReplyInfo{
+    bool success = 1;
+    string registerId = 2;
+}
