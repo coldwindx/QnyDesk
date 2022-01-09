@@ -50,7 +50,7 @@ constexpr CsHostInfo::CsHostInfo(
   : cpuid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , deviceid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , macaddress_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , active_(false){}
+  , active_(0){}
 struct CsHostInfoDefaultTypeInternal {
   constexpr CsHostInfoDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -138,7 +138,7 @@ const char descriptor_table_protodef_Exchange_2eproto[] PROTOBUF_SECTION_VARIABL
   "peReplyRegisterDetails\020\002B\n\n\010dataBody\"\r\n\013"
   "WMHeartBeat\"Q\n\nCsHostInfo\022\r\n\005cpuId\030\001 \001(\t"
   "\022\020\n\010deviceId\030\002 \001(\t\022\022\n\nmacAddress\030\003 \001(\t\022\016"
-  "\n\006active\030\004 \001(\010\"2\n\013ScReplyInfo\022\017\n\007success"
+  "\n\006active\030\004 \001(\005\"2\n\013ScReplyInfo\022\017\n\007success"
   "\030\001 \001(\010\022\022\n\nregisterId\030\002 \001(\tB!\n\024com.qnydes"
   "k.protocolB\007BigPackH\001b\006proto3"
   ;
@@ -824,7 +824,7 @@ void CsHostInfo::SharedCtor() {
 cpuid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 deviceid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 macaddress_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-active_ = false;
+active_ = 0;
 }
 
 CsHostInfo::~CsHostInfo() {
@@ -859,7 +859,7 @@ void CsHostInfo::Clear() {
   cpuid_.ClearToEmpty();
   deviceid_.ClearToEmpty();
   macaddress_.ClearToEmpty();
-  active_ = false;
+  active_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -896,7 +896,7 @@ const char* CsHostInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // bool active = 4;
+      // int32 active = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
           active_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
@@ -962,10 +962,10 @@ failure:
         3, this->_internal_macaddress(), target);
   }
 
-  // bool active = 4;
+  // int32 active = 4;
   if (this->active() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(4, this->_internal_active(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_active(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1005,9 +1005,11 @@ size_t CsHostInfo::ByteSizeLong() const {
         this->_internal_macaddress());
   }
 
-  // bool active = 4;
+  // int32 active = 4;
   if (this->active() != 0) {
-    total_size += 1 + 1;
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_active());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {

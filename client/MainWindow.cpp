@@ -76,8 +76,6 @@ void MainWindow::startPassiveConnect()
     connect(thread, &QThread::started, passiveNetworkHander, &PassiveHandler::createSocket);
     // 连接成功
     connect(passiveNetworkHander, &PassiveHandler::connectStateChanged, this, &MainWindow::afterConnectStateChanged);
-//    connect(passiveNetworkHander, &PassiveHandler::connected, this, &MainWindow::afterConnectStateChanged);
-    
     // 窗口关闭
     // <1> 关闭socket连接
     connect(this, &MainWindow::closed, passiveNetworkHander, &PassiveHandler::removeSocket);

@@ -53,6 +53,17 @@ void NetworkHandler::removeSocket()
     emit finished();
 }
 
+QByteArray NetworkHandler::intToBytes(int n)
+{
+    QByteArray buf;
+    buf.resize(4);
+    buf[3] = static_cast<quint16>(n & 0xff);
+    buf[2] = static_cast<quint16>(n >> 8 & 0xff);
+    buf[1] = static_cast<quint16>(n >> 16 & 0xff);
+    buf[0] = static_cast<quint16>(n >> 24 & 0xff);
+    return buf;
+}
+
 void NetworkHandler::connectedEvent()
 {
     // 发送设备信息给服务器
@@ -70,6 +81,7 @@ void NetworkHandler::connectedEvent()
     std::string msg;
     ex.SerializeToString(&msg);
     // <4> 发送数据
+    socket->write(intToBytes(ex.ByteSizeLong()), sizeof(quint32));
     int ok = socket->write(msg.c_str(), ex.ByteSizeLong());
     socket->flush();
     if(-1 == ok)
@@ -83,22 +95,33 @@ void NetworkHandler::stateChangedEvent(QAbstractSocket::SocketState socketState)
     // 一般服务器没有开转这个状态
     if(QAbstractSocket::UnconnectedState == socketState)
     {
-        qDebug() << "Can not connect to remote server!";
+        qDebug() << "Can not connect to remote server!" << device->getHost() << ":" << device->getPort();
         // 发送连接失败信号
         emit connectStateChanged(false);
         // 启动重连定时器
         // 程序退出时，这里会接收到信号，此时timer已经释放，需要提前判断timer
-        if(timer && !timer->isActive())
-            timer->start(5000);
-        qDebug() << "Activate timer to reconnect!";
+        if(timer)
+        {
+            if(!timer->isActive())
+                timer->start(5000);
+            qDebug() << "Activate timer to reconnect!";
+            return ;
+        }
+        qDebug() << "The timer is not active!";
         return ;
     }
     // 一般服务器开启连接端口号没有开转这个状态
     if(QAbstractSocket::ConnectingState == socketState)
     {
         // 启动重连定时器
-        if(!timer->isActive())
-            timer->start(5000);
+        if(timer)
+        {
+            if(!timer->isActive())
+                timer->start(5000);
+            qDebug() << "Activate timer to reconnect!";
+            return ;
+        }
+        qDebug() << "The timer is not active!";
         return ;
     }
     // 连接成功
@@ -112,8 +135,14 @@ void NetworkHandler::stateChangedEvent(QAbstractSocket::SocketState socketState)
     {
         emit connectStateChanged(false);
         // 启动重连定时器
-        if(!timer->isActive())
-            timer->start(5000);
+        if(timer)
+        {
+            if(!timer->isActive())
+                timer->start(5000);
+            qDebug() << "Activate timer to reconnect!";
+            return ;
+        }
+        qDebug() << "The timer is not active!";
         return ;
     }
 }

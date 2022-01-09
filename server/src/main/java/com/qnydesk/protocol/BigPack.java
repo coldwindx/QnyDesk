@@ -92,6 +92,10 @@ public final class BigPack {
     public com.qnydesk.protocol.BigPack.Exchange.DataBodyCase getDataBodyCase();
   }
   /**
+   * <pre>
+   * C++的头文件名取第一个message名
+   * </pre>
+   *
    * Protobuf type {@code BigPack.Exchange}
    */
   public static final class Exchange extends
@@ -797,6 +801,10 @@ public final class BigPack {
       return builder;
     }
     /**
+     * <pre>
+     * C++的头文件名取第一个message名
+     * </pre>
+     *
      * Protobuf type {@code BigPack.Exchange}
      */
     public static final class Builder extends
@@ -2038,10 +2046,10 @@ public final class BigPack {
         getMacAddressBytes();
 
     /**
-     * <code>bool active = 4;</code>
+     * <code>int32 active = 4;</code>
      * @return The active.
      */
-    boolean getActive();
+    int getActive();
   }
   /**
    * Protobuf type {@code BigPack.CsHostInfo}
@@ -2111,7 +2119,7 @@ public final class BigPack {
             }
             case 32: {
 
-              active_ = input.readBool();
+              active_ = input.readInt32();
               break;
             }
             default: {
@@ -2261,13 +2269,13 @@ public final class BigPack {
     }
 
     public static final int ACTIVE_FIELD_NUMBER = 4;
-    private boolean active_;
+    private int active_;
     /**
-     * <code>bool active = 4;</code>
+     * <code>int32 active = 4;</code>
      * @return The active.
      */
     @java.lang.Override
-    public boolean getActive() {
+    public int getActive() {
       return active_;
     }
 
@@ -2294,8 +2302,8 @@ public final class BigPack {
       if (!getMacAddressBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, macAddress_);
       }
-      if (active_ != false) {
-        output.writeBool(4, active_);
+      if (active_ != 0) {
+        output.writeInt32(4, active_);
       }
       unknownFields.writeTo(output);
     }
@@ -2315,9 +2323,9 @@ public final class BigPack {
       if (!getMacAddressBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, macAddress_);
       }
-      if (active_ != false) {
+      if (active_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, active_);
+          .computeInt32Size(4, active_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2360,8 +2368,7 @@ public final class BigPack {
       hash = (37 * hash) + MACADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getMacAddress().hashCode();
       hash = (37 * hash) + ACTIVE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getActive());
+      hash = (53 * hash) + getActive();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2501,7 +2508,7 @@ public final class BigPack {
 
         macAddress_ = "";
 
-        active_ = false;
+        active_ = 0;
 
         return this;
       }
@@ -2593,7 +2600,7 @@ public final class BigPack {
           macAddress_ = other.macAddress_;
           onChanged();
         }
-        if (other.getActive() != false) {
+        if (other.getActive() != 0) {
           setActive(other.getActive());
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -2853,33 +2860,33 @@ public final class BigPack {
         return this;
       }
 
-      private boolean active_ ;
+      private int active_ ;
       /**
-       * <code>bool active = 4;</code>
+       * <code>int32 active = 4;</code>
        * @return The active.
        */
       @java.lang.Override
-      public boolean getActive() {
+      public int getActive() {
         return active_;
       }
       /**
-       * <code>bool active = 4;</code>
+       * <code>int32 active = 4;</code>
        * @param value The active to set.
        * @return This builder for chaining.
        */
-      public Builder setActive(boolean value) {
+      public Builder setActive(int value) {
         
         active_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>bool active = 4;</code>
+       * <code>int32 active = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearActive() {
         
-        active_ = false;
+        active_ = 0;
         onChanged();
         return this;
       }
@@ -3614,7 +3621,7 @@ public final class BigPack {
       "peReplyRegisterDetails\020\002B\n\n\010dataBody\"\r\n\013" +
       "WMHeartBeat\"Q\n\nCsHostInfo\022\r\n\005cpuId\030\001 \001(\t" +
       "\022\020\n\010deviceId\030\002 \001(\t\022\022\n\nmacAddress\030\003 \001(\t\022\016" +
-      "\n\006active\030\004 \001(\010\"2\n\013ScReplyInfo\022\017\n\007success" +
+      "\n\006active\030\004 \001(\005\"2\n\013ScReplyInfo\022\017\n\007success" +
       "\030\001 \001(\010\022\022\n\nregisterId\030\002 \001(\tB!\n\024com.qnydes" +
       "k.protocolB\007BigPackH\001b\006proto3"
     };

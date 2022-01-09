@@ -32,7 +32,7 @@ message CsHostInfo{
     string cpuId = 1;
     string deviceId = 2;
     string macAddress = 3;
-    bool active = 4;
+    int32 active = 4;
 }
 
 message ScReplyInfo{

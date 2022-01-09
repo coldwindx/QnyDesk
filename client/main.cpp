@@ -3,12 +3,14 @@
 #include <QDateTime>
 #include <QFileInfo>
 #include <QDir>
+#include "common/Logger.h"
 #include <QDebug>
 void setDebugOutput(const QString &rawTargetFilePath_, const bool &argDateFlag_ = false);
 int main(int argc, char *argv[])
 {
-    setDebugOutput("./debug.log");
+    // setDebugOutput("./debug.log");
     GOOGLE_PROTOBUF_VERIFY_VERSION;         // 启用protobuf
+    Logger::useLog(Logger::FILE);
     QApplication a(argc, argv);
     a.setQuitOnLastWindowClosed(false);     // 主窗口关闭，程序不退出
     MainWindow w;

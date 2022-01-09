@@ -40,6 +40,8 @@ private:
     TransferType type;
     DeviceInfo * device;
     QTimer * timer;                         // 重连定时器
+
+    QByteArray intToBytes(int n);           // 转大端字节数组 
 };
 
 #endif

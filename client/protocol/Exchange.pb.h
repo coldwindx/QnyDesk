@@ -641,13 +641,13 @@ class CsHostInfo PROTOBUF_FINAL :
   std::string* _internal_mutable_macaddress();
   public:
 
-  // bool active = 4;
+  // int32 active = 4;
   void clear_active();
-  bool active() const;
-  void set_active(bool value);
+  ::PROTOBUF_NAMESPACE_ID::int32 active() const;
+  void set_active(::PROTOBUF_NAMESPACE_ID::int32 value);
   private:
-  bool _internal_active() const;
-  void _internal_set_active(bool value);
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_active() const;
+  void _internal_set_active(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:BigPack.CsHostInfo)
@@ -660,7 +660,7 @@ class CsHostInfo PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cpuid_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr deviceid_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr macaddress_;
-  bool active_;
+  ::PROTOBUF_NAMESPACE_ID::int32 active_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Exchange_2eproto;
 };
@@ -1250,22 +1250,22 @@ inline void CsHostInfo::set_allocated_macaddress(std::string* macaddress) {
   // @@protoc_insertion_point(field_set_allocated:BigPack.CsHostInfo.macAddress)
 }
 
-// bool active = 4;
+// int32 active = 4;
 inline void CsHostInfo::clear_active() {
-  active_ = false;
+  active_ = 0;
 }
-inline bool CsHostInfo::_internal_active() const {
+inline ::PROTOBUF_NAMESPACE_ID::int32 CsHostInfo::_internal_active() const {
   return active_;
 }
-inline bool CsHostInfo::active() const {
+inline ::PROTOBUF_NAMESPACE_ID::int32 CsHostInfo::active() const {
   // @@protoc_insertion_point(field_get:BigPack.CsHostInfo.active)
   return _internal_active();
 }
-inline void CsHostInfo::_internal_set_active(bool value) {
+inline void CsHostInfo::_internal_set_active(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   active_ = value;
 }
-inline void CsHostInfo::set_active(bool value) {
+inline void CsHostInfo::set_active(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _internal_set_active(value);
   // @@protoc_insertion_point(field_set:BigPack.CsHostInfo.active)
 }

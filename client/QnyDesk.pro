@@ -38,6 +38,7 @@ HEADERS += \
         button/SettingButton.h \
         common/NetworkHandler.h \
         common/DeviceInfo.h \
+        common/Logger.h \
         qny_passive/PassiveHandler.h \
         protocol/Exchange.pb.h \
         button/PasswordButton.h

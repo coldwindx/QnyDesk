@@ -198,6 +198,6 @@ QString DeviceInfo::hash(const QString & str1, const QString & str2)
 {
     QString sum = str1 + str2;
     QByteArray array = QCryptographicHash::hash(sum.toUtf8(), QCryptographicHash::Md5);
-    return array;
+    return array.toBase64();
 }
 
