@@ -36,12 +36,14 @@ SOURCES += \
 HEADERS += \
         MainWindow.h \
         button/SettingButton.h \
+        button/EyeButton.h \
+        button/PencilButton.h \
         common/NetworkHandler.h \
         common/DeviceInfo.h \
         common/Logger.h \
         qny_passive/PassiveHandler.h \
-        protocol/Exchange.pb.h \
-        button/PasswordButton.h
+        protocol/Exchange.pb.h 
+        
 
 FORMS += \
         ui/MainWindow.ui

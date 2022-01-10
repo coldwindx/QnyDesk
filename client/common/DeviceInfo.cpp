@@ -15,10 +15,13 @@
 #error Only supports MSVC or GCC
 #endif
 
-DeviceInfo::DeviceInfo(const QString & host, quint16 port, QObject * parent) 
-    : QObject(parent) 
+void DeviceInfo::setHost(QString host)
 {
     this->host = host;
+}
+
+void DeviceInfo::setPort(quint16 port)
+{
     this->port = port;
 }
 
@@ -157,6 +160,17 @@ QString DeviceInfo::platformCpuId()
     return cpu_id+cpu_id2;
 }
 
+QString DeviceInfo::getPassword()
+{
+    return password;
+}
+
+void DeviceInfo::setPassword(const QString &password)
+{
+    this->password = password;
+}
+
+
 void DeviceInfo::getcpuid(unsigned int CPUInfo[4], unsigned int InfoType)
 {
 #if defined(__GNUC__)// GCC
@@ -199,5 +213,13 @@ QString DeviceInfo::hash(const QString & str1, const QString & str2)
     QString sum = str1 + str2;
     QByteArray array = QCryptographicHash::hash(sum.toUtf8(), QCryptographicHash::Md5);
     return array.toBase64();
+}
+
+void DeviceInfo::xorData(QByteArray &data)
+{
+    static QByteArray key1 = "privatekey";
+    static QByteArray key2 = "helloworld";
+    for(int i = 0, size = data.size(); i < size; ++i)
+        data[i] = data[i] ^ key1[i % key1.size()] ^ key2[i % key2.size()];
 }
 

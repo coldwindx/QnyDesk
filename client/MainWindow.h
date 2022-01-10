@@ -7,6 +7,7 @@
 #include <QThread>
 #include <QSettings>
 #include <QSystemTrayIcon>
+#include <QUuid>
 #include "button/SettingButton.h"
 #include "qny_passive/PassiveHandler.h"
 #include "common/DeviceInfo.h"
@@ -40,8 +41,13 @@ private:
     void quit();                                        // 程序退出
     void registerEvent(QString registerId);             // 被控网络注册事件
 
+    void setPassword(const QString &password);          // 设置设备密码
+    void showPassword(bool checked = false);            // 显示密码
+    QString reflashPassword();                          // 刷新密码
+
     void afterConnectStateChanged(bool flag);           // 连接成功后序操作
     void afterSocketFinish();
+
 
 };
 

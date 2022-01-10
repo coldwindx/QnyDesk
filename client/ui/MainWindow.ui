@@ -227,7 +227,7 @@ QPushButton::menu-indicator{
          <string>--- ---</string>
         </property>
        </widget>
-       <widget class="PasswordButton" name="moreBtn_2">
+       <widget class="PencilButton" name="pencilBtn">
         <property name="geometry">
          <rect>
           <x>190</x>
@@ -259,7 +259,7 @@ QPushButton::menu-indicator{
          <string/>
         </property>
        </widget>
-       <widget class="PasswordButton" name="moreBtn_3">
+       <widget class="EyeButton" name="eyeBtn">
         <property name="geometry">
          <rect>
           <x>150</x>
@@ -347,7 +347,7 @@ QPushButton::menu-indicator{
             <string>远程控制桌面</string>
            </property>
           </widget>
-          <widget class="QLineEdit" name="lineEdit">
+          <widget class="QLineEdit" name="remoteIdEdit">
            <property name="geometry">
             <rect>
              <x>50</x>
@@ -465,9 +465,14 @@ QPushButton#connectBtn::pressed{
    <header>button/SettingButton.h</header>
   </customwidget>
   <customwidget>
-   <class>PasswordButton</class>
+   <class>PencilButton</class>
    <extends>QPushButton</extends>
-   <header>button/PasswordButton.h</header>
+   <header>button/PencilButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>EyeButton</class>
+   <extends>QPushButton</extends>
+   <header>button/EyeButton.h</header>
   </customwidget>
  </customwidgets>
  <resources>

@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     if(isAlreadyRun()) return 0;
 #endif
     GOOGLE_PROTOBUF_VERIFY_VERSION;         // 启用protobuf
-    Logger::useLog(Logger::FILE);
+    Logger::useLog(Logger::CONSOLE);
     QApplication a(argc, argv);
     a.setQuitOnLastWindowClosed(false);     // 主窗口关闭，程序不退出
     MainWindow w;

@@ -7,6 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //--------------------按钮信号------------------------
+    connect(ui->eyeBtn, &QPushButton::clicked, this, &MainWindow::showPassword);
+    connect(ui->pencilBtn, &PencilButton::reflash, this, &MainWindow::reflashPassword);
+
     setTrayMenu();          // 系统托盘显示
     loadSettings();         // 加载配置文件
     startPassiveConnect();  // 启动被控网络
@@ -19,7 +23,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::link()
 {
-    qDebug() << "This button is clicked!";
+    QString remoteId = ui->remoteIdEdit->text().remove(QRegExp("\\s"));
+    // 无法连接自己
+    
 }
 
 void MainWindow::setTrayMenu()
@@ -45,10 +51,11 @@ void MainWindow::setTrayMenu()
 
 void MainWindow::loadSettings()
 {
+    device = new DeviceInfo(this);
     // 加载配置文件
     QSettings settings("config.ini", QSettings::IniFormat);
     settings.beginGroup("REMOTE_DESKTOP_SERVER");
-
+    // <1> 加载远程服务器信息
     QString remoteHost = settings.value("remoteHost").toString();
     int remotePort = settings.value("remotePort").toInt();
     if(remoteHost.isEmpty())
@@ -61,11 +68,28 @@ void MainWindow::loadSettings()
         remotePort = 443;
         settings.setValue("remotePort", 443);
     }
-
+    // <2> 加载密码
+    QString password = settings.value("password").toString();
+    if(password.isEmpty())
+    {
+        QString uuid = QUuid::createUuid().toString().remove("{").remove("}").remove("-");
+        password = uuid.right(6);
+        QByteArray npw = password.toLatin1();
+        DeviceInfo::xorData(npw);
+        settings.setValue("password", npw);
+    }else
+    {
+        QByteArray npw = password.toLatin1();
+        DeviceInfo::xorData(npw);
+        password = npw;
+    }
+    device->setPassword(password);
     settings.endGroup();
     settings.sync();
-    // 保存设备信息
-    device = new DeviceInfo(remoteHost, remotePort, this);
+
+    device->setHost(remoteHost);
+    device->setPort(remotePort);
+    device->setPassword(password);
 }
 
 void MainWindow::startPassiveConnect()
@@ -120,4 +144,36 @@ void MainWindow::registerEvent(QString id)
     id = id.mid(0, 3) + " " + id.mid(3, 3) + " " + id.mid(6, 3);
     ui->idLabel->setText(id);
     ui->connectBtn->setEnabled(true);
+}
+
+void MainWindow::setPassword(const QString & password)
+{
+    QSettings setting("config.ini", QSettings::IniFormat);
+    setting.beginGroup("REMOTE_DESKTOP_SERVER");
+
+    device->setPassword(password);
+    QByteArray npw = password.toLatin1();
+    DeviceInfo::xorData(npw);
+    setting.setValue("password", npw);
+
+    setting.endGroup();
+    setting.sync();
+}
+
+void MainWindow::showPassword(bool checked)
+{
+    bool show = ui->eyeBtn->changeState();
+    QString pw = show ? device->getPassword() : "******";
+    ui->passwordLabel->setText(pw);
+}
+
+QString MainWindow::reflashPassword()
+{
+    QString uuid = QUuid::createUuid().toString().remove("{").remove("}").remove("-");
+    QString password = uuid.right(6);
+    setPassword(password);
+    bool show = ui->eyeBtn->getState();
+    QString pw = show ? device->getPassword() : "******";
+    ui->passwordLabel->setText(pw);
+    return password;
 }
