@@ -17,7 +17,9 @@ public:
         connect(reflash, &QAction::triggered, this, [&](){ emit this->reflash(); });
         menu->addAction(reflash);
         // <2> 设置密码
-        menu->addAction(new QAction("设置密码"));
+//        QAction * replace = new QAction("设置密码", this);
+//        connect(replace, &QAction::triggered, this, [&](){ emit this->replace(); });
+//        menu->addAction(replace);
         // <3> 加载样式表
         QFile file("://css/menu.css");
         if(file.open(QFile::ReadOnly))
@@ -34,6 +36,7 @@ public:
 
 signals:
     void reflash();
+    void replace();
 private:
     QMenu * menu;
 };

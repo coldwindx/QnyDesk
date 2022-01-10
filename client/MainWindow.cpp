@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //--------------------按钮信号------------------------
     connect(ui->eyeBtn, &QPushButton::clicked, this, &MainWindow::showPassword);
     connect(ui->pencilBtn, &PencilButton::reflash, this, &MainWindow::reflashPassword);
+    connect(ui->pencilBtn, &PencilButton::replace, this, &MainWindow::replacePassword);
 
     setTrayMenu();          // 系统托盘显示
     loadSettings();         // 加载配置文件
@@ -176,4 +177,9 @@ QString MainWindow::reflashPassword()
     QString pw = show ? device->getPassword() : "******";
     ui->passwordLabel->setText(pw);
     return password;
+}
+
+void MainWindow::replacePassword()
+{
+
 }
