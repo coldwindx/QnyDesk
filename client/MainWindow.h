@@ -11,6 +11,7 @@
 #include "button/SettingButton.h"
 #include "qny_passive/PassiveHandler.h"
 #include "common/DeviceInfo.h"
+#include "qny_active/ScreenLook.h"
 
 namespace Ui {
     class MainWindow;

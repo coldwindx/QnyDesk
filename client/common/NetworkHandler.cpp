@@ -203,6 +203,18 @@ void NetworkHandler::readEvent()
     }
 }
 
+void NetworkHandler::dealProto(int type, BigPack::Exchange &ex)
+{
+    if(BigPack::Exchange::TypeReplyRegisterDetails == type)
+    {
+        if(ex.replyinfo().success())
+        {
+            this->registerId = QString::fromStdString(ex.replyinfo().registerid());
+        }
+        return;
+    }
+}
+
 void NetworkHandler::errorEvent(QAbstractSocket::SocketError error)
 {
     qDebug() << "Socket Error:" << socket->errorString();

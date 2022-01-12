@@ -25,12 +25,22 @@ void DeviceInfo::setPort(quint16 port)
     this->port = port;
 }
 
+void DeviceInfo::setId(QString id)
+{
+    this->id = id;
+}
+
 QString  DeviceInfo::getHost(){
     return this->host ;
 }
 
 quint16 DeviceInfo::getPort(){
     return this->port;
+}
+
+QString DeviceInfo::getId()
+{
+    return this->id;
 }
 
 //得到网络地址

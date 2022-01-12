@@ -11,8 +11,10 @@ public:
     ~DeviceInfo() {}
     void setHost(QString host);
     void setPort(quint16 port);
+    void setId(QString id);
     QString getHost();
     quint16 getPort();
+    QString getId();
     // 获取本机网络IP
     QString netWorkIp();
     // 获取本机MAC地址
@@ -31,7 +33,8 @@ public:
 private:
     QString host;
     quint16 port;
-    QString password = "111111";
+    QString password;
+    QString id;
 
     void getcpuid(unsigned int CPUInfo[], unsigned int InfoType);
     void getcpuidex(unsigned int CPUInfo[], unsigned int InfoType, unsigned int ECXValue);

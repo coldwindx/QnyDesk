@@ -31,21 +31,24 @@ public:
 
     void readEvent();                                               // 从网络套接字读取数据
 
-    virtual void dealProto(int type, BigPack::Exchange & ex){}      // 处理协议数据
+    virtual void dealProto(int type, BigPack::Exchange & ex);       // 处理协议数据
 public slots:   // Qt4需要slots指定为槽函数
     void errorEvent(QAbstractSocket::SocketError socketError);      // 错误消息处理
 signals:
     void connectStateChanged(bool flag);
     void finished();
-private:
+protected:
     QTcpSocket * socket;
+    QString registerId;                     // 注册ID
+
+    QByteArray intToBytes(int n);           // 转大端字节数组
+    int bytesToInt(const QByteArray& b);
+private:
+
     TransferType type;
     DeviceInfo * device;
     QTimer * timer;                         // 重连定时器
     QByteArray buffer;                      // 信息缓冲区
-
-    QByteArray intToBytes(int n);           // 转大端字节数组 
-    int bytesToInt(const QByteArray& b);
 };
 
 #endif

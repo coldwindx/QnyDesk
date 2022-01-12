@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->eyeBtn, &QPushButton::clicked, this, &MainWindow::showPassword);
     connect(ui->pencilBtn, &PencilButton::reflash, this, &MainWindow::reflashPassword);
     connect(ui->pencilBtn, &PencilButton::replace, this, &MainWindow::replacePassword);
+    connect(ui->connectBtn, &QPushButton::clicked, this, &MainWindow::link);
 
     setTrayMenu();          // 系统托盘显示
     loadSettings();         // 加载配置文件
@@ -26,7 +27,13 @@ void MainWindow::link()
 {
     QString remoteId = ui->remoteIdEdit->text().remove(QRegExp("\\s"));
     // 无法连接自己
-    
+    if(remoteId == ui->idLabel->text().remove(QRegExp("\\s")))
+    {
+        QMessageBox::critical(this, "错误", "无法连接自己");
+        return ;
+    }
+    device->setId(remoteId);
+    new ScreenLook(device);
 }
 
 void MainWindow::setTrayMenu()

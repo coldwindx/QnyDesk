@@ -31,7 +31,10 @@ SOURCES += \
         MainWindow.cpp \
         common/DeviceInfo.cpp \
         common/NetworkHandler.cpp \
-        protocol/Exchange.pb.cc 
+        protocol/Exchange.pb.cc \ 
+        codec/VPxDecoder.cpp \
+        qny_active/ScreenLook.cpp \
+        qny_active/PasswordDialog.cpp
 
 HEADERS += \
         MainWindow.h \
@@ -42,11 +45,17 @@ HEADERS += \
         common/DeviceInfo.h \
         common/Logger.h \
         qny_passive/PassiveHandler.h \
-        protocol/Exchange.pb.h 
+        protocol/Exchange.pb.h \ 
+        codec/VPxDecoder.h \
+        qny_active/ScreenLook.h \
+        qny_active/ActiveHandler.h \
+        qny_active/PasswordDialog.h \
+    common/MoveDialog.h
         
 
 FORMS += \
-        ui/MainWindow.ui
+        ui/MainWindow.ui \
+        qny_active/PasswordDialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -21,6 +21,8 @@ constexpr Exchange::Exchange(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : resourceid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , targetid_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , requestauth_(nullptr)
+  , wheelevent_(nullptr)
   , type_(0)
 
   , errorcode_(0)
@@ -73,8 +75,32 @@ struct ScReplyInfoDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ScReplyInfoDefaultTypeInternal _ScReplyInfo_default_instance_;
+constexpr CsRequestAuth::CsRequestAuth(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : password_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string){}
+struct CsRequestAuthDefaultTypeInternal {
+  constexpr CsRequestAuthDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~CsRequestAuthDefaultTypeInternal() {}
+  union {
+    CsRequestAuth _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT CsRequestAuthDefaultTypeInternal _CsRequestAuth_default_instance_;
+constexpr CsWheelEvent::CsWheelEvent(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : deltapos_(false){}
+struct CsWheelEventDefaultTypeInternal {
+  constexpr CsWheelEventDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~CsWheelEventDefaultTypeInternal() {}
+  union {
+    CsWheelEvent _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT CsWheelEventDefaultTypeInternal _CsWheelEvent_default_instance_;
 }  // namespace BigPack
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Exchange_2eproto[4];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Exchange_2eproto[6];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_Exchange_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Exchange_2eproto = nullptr;
 
@@ -90,6 +116,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Exchange_2eproto::offsets[] PR
   PROTOBUF_FIELD_OFFSET(::BigPack::Exchange, errorcode_),
   ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  PROTOBUF_FIELD_OFFSET(::BigPack::Exchange, requestauth_),
+  PROTOBUF_FIELD_OFFSET(::BigPack::Exchange, wheelevent_),
   PROTOBUF_FIELD_OFFSET(::BigPack::Exchange, dataBody_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::BigPack::WMHeartBeat, _internal_metadata_),
@@ -112,12 +140,26 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Exchange_2eproto::offsets[] PR
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::BigPack::ScReplyInfo, success_),
   PROTOBUF_FIELD_OFFSET(::BigPack::ScReplyInfo, registerid_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::BigPack::CsRequestAuth, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::BigPack::CsRequestAuth, password_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::BigPack::CsWheelEvent, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::BigPack::CsWheelEvent, deltapos_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::BigPack::Exchange)},
-  { 12, -1, sizeof(::BigPack::WMHeartBeat)},
-  { 17, -1, sizeof(::BigPack::CsHostInfo)},
-  { 26, -1, sizeof(::BigPack::ScReplyInfo)},
+  { 14, -1, sizeof(::BigPack::WMHeartBeat)},
+  { 19, -1, sizeof(::BigPack::CsHostInfo)},
+  { 28, -1, sizeof(::BigPack::ScReplyInfo)},
+  { 35, -1, sizeof(::BigPack::CsRequestAuth)},
+  { 41, -1, sizeof(::BigPack::CsWheelEvent)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -125,27 +167,34 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::BigPack::_WMHeartBeat_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::BigPack::_CsHostInfo_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::BigPack::_ScReplyInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::BigPack::_CsRequestAuth_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::BigPack::_CsWheelEvent_default_instance_),
 };
 
 const char descriptor_table_protodef_Exchange_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016Exchange.proto\022\007BigPack\"\240\002\n\010Exchange\022("
+  "\n\016Exchange.proto\022\007BigPack\"\215\003\n\010Exchange\022("
   "\n\004type\030\001 \001(\0162\032.BigPack.Exchange.DataType"
   "\022\022\n\nresourceId\030\002 \001(\t\022\020\n\010targetId\030\003 \001(\t\022\021"
   "\n\terrorCode\030\004 \001(\005\022\'\n\010hostInfo\030\005 \001(\0132\023.Bi"
   "gPack.CsHostInfoH\000\022)\n\treplyInfo\030\006 \001(\0132\024."
-  "BigPack.ScReplyInfoH\000\"Q\n\010DataType\022\021\n\rTyp"
-  "eHeartBeat\020\000\022\024\n\020TypeRegisterHost\020\001\022\034\n\030Ty"
-  "peReplyRegisterDetails\020\002B\n\n\010dataBody\"\r\n\013"
-  "WMHeartBeat\"Q\n\nCsHostInfo\022\r\n\005cpuId\030\001 \001(\t"
-  "\022\020\n\010deviceId\030\002 \001(\t\022\022\n\nmacAddress\030\003 \001(\t\022\016"
-  "\n\006active\030\004 \001(\005\"2\n\013ScReplyInfo\022\017\n\007success"
-  "\030\001 \001(\010\022\022\n\nregisterId\030\002 \001(\tB!\n\024com.qnydes"
-  "k.protocolB\007BigPackH\001b\006proto3"
+  "BigPack.ScReplyInfoH\000\022+\n\013requestAuth\030\007 \001"
+  "(\0132\026.BigPack.CsRequestAuth\022)\n\nwheelEvent"
+  "\030\010 \001(\0132\025.BigPack.CsWheelEvent\"f\n\010DataTyp"
+  "e\022\021\n\rTypeHeartBeat\020\000\022\024\n\020TypeRegisterHost"
+  "\020\001\022\034\n\030TypeReplyRegisterDetails\020\002\022\023\n\017Type"
+  "RequestAuth\020\003B\n\n\010dataBody\"\r\n\013WMHeartBeat"
+  "\"Q\n\nCsHostInfo\022\r\n\005cpuId\030\001 \001(\t\022\020\n\010deviceI"
+  "d\030\002 \001(\t\022\022\n\nmacAddress\030\003 \001(\t\022\016\n\006active\030\004 "
+  "\001(\005\"2\n\013ScReplyInfo\022\017\n\007success\030\001 \001(\010\022\022\n\nr"
+  "egisterId\030\002 \001(\t\"!\n\rCsRequestAuth\022\020\n\010pass"
+  "word\030\001 \001(\t\" \n\014CsWheelEvent\022\020\n\010deltapos\030\001"
+  " \001(\010B!\n\024com.qnydesk.protocolB\007BigPackH\001b"
+  "\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Exchange_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Exchange_2eproto = {
-  false, false, 509, descriptor_table_protodef_Exchange_2eproto, "Exchange.proto", 
-  &descriptor_table_Exchange_2eproto_once, nullptr, 0, 4,
+  false, false, 687, descriptor_table_protodef_Exchange_2eproto, "Exchange.proto", 
+  &descriptor_table_Exchange_2eproto_once, nullptr, 0, 6,
   schemas, file_default_instances, TableStruct_Exchange_2eproto::offsets,
   file_level_metadata_Exchange_2eproto, file_level_enum_descriptors_Exchange_2eproto, file_level_service_descriptors_Exchange_2eproto,
 };
@@ -165,6 +214,7 @@ bool Exchange_DataType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+    case 3:
       return true;
     default:
       return false;
@@ -175,6 +225,7 @@ bool Exchange_DataType_IsValid(int value) {
 constexpr Exchange_DataType Exchange::TypeHeartBeat;
 constexpr Exchange_DataType Exchange::TypeRegisterHost;
 constexpr Exchange_DataType Exchange::TypeReplyRegisterDetails;
+constexpr Exchange_DataType Exchange::TypeRequestAuth;
 constexpr Exchange_DataType Exchange::DataType_MIN;
 constexpr Exchange_DataType Exchange::DataType_MAX;
 constexpr int Exchange::DataType_ARRAYSIZE;
@@ -186,6 +237,8 @@ class Exchange::_Internal {
  public:
   static const ::BigPack::CsHostInfo& hostinfo(const Exchange* msg);
   static const ::BigPack::ScReplyInfo& replyinfo(const Exchange* msg);
+  static const ::BigPack::CsRequestAuth& requestauth(const Exchange* msg);
+  static const ::BigPack::CsWheelEvent& wheelevent(const Exchange* msg);
 };
 
 const ::BigPack::CsHostInfo&
@@ -195,6 +248,14 @@ Exchange::_Internal::hostinfo(const Exchange* msg) {
 const ::BigPack::ScReplyInfo&
 Exchange::_Internal::replyinfo(const Exchange* msg) {
   return *msg->dataBody_.replyinfo_;
+}
+const ::BigPack::CsRequestAuth&
+Exchange::_Internal::requestauth(const Exchange* msg) {
+  return *msg->requestauth_;
+}
+const ::BigPack::CsWheelEvent&
+Exchange::_Internal::wheelevent(const Exchange* msg) {
+  return *msg->wheelevent_;
 }
 void Exchange::set_allocated_hostinfo(::BigPack::CsHostInfo* hostinfo) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
@@ -245,6 +306,16 @@ Exchange::Exchange(const Exchange& from)
     targetid_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_targetid(), 
       GetArena());
   }
+  if (from._internal_has_requestauth()) {
+    requestauth_ = new ::BigPack::CsRequestAuth(*from.requestauth_);
+  } else {
+    requestauth_ = nullptr;
+  }
+  if (from._internal_has_wheelevent()) {
+    wheelevent_ = new ::BigPack::CsWheelEvent(*from.wheelevent_);
+  } else {
+    wheelevent_ = nullptr;
+  }
   ::memcpy(&type_, &from.type_,
     static_cast<size_t>(reinterpret_cast<char*>(&errorcode_) -
     reinterpret_cast<char*>(&type_)) + sizeof(errorcode_));
@@ -269,9 +340,9 @@ void Exchange::SharedCtor() {
 resourceid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 targetid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&type_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&requestauth_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&errorcode_) -
-    reinterpret_cast<char*>(&type_)) + sizeof(errorcode_));
+    reinterpret_cast<char*>(&requestauth_)) + sizeof(errorcode_));
 clear_has_dataBody();
 }
 
@@ -285,6 +356,8 @@ void Exchange::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   resourceid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   targetid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete requestauth_;
+  if (this != internal_default_instance()) delete wheelevent_;
   if (has_dataBody()) {
     clear_dataBody();
   }
@@ -331,6 +404,14 @@ void Exchange::Clear() {
 
   resourceid_.ClearToEmpty();
   targetid_.ClearToEmpty();
+  if (GetArena() == nullptr && requestauth_ != nullptr) {
+    delete requestauth_;
+  }
+  requestauth_ = nullptr;
+  if (GetArena() == nullptr && wheelevent_ != nullptr) {
+    delete wheelevent_;
+  }
+  wheelevent_ = nullptr;
   ::memset(&type_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&errorcode_) -
       reinterpret_cast<char*>(&type_)) + sizeof(errorcode_));
@@ -388,6 +469,20 @@ const char* Exchange::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           ptr = ctx->ParseMessage(_internal_mutable_replyinfo(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .BigPack.CsRequestAuth requestAuth = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_requestauth(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .BigPack.CsWheelEvent wheelEvent = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
+          ptr = ctx->ParseMessage(_internal_mutable_wheelevent(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -469,6 +564,22 @@ failure:
         6, _Internal::replyinfo(this), target, stream);
   }
 
+  // .BigPack.CsRequestAuth requestAuth = 7;
+  if (this->has_requestauth()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        7, _Internal::requestauth(this), target, stream);
+  }
+
+  // .BigPack.CsWheelEvent wheelEvent = 8;
+  if (this->has_wheelevent()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        8, _Internal::wheelevent(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -497,6 +608,20 @@ size_t Exchange::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_targetid());
+  }
+
+  // .BigPack.CsRequestAuth requestAuth = 7;
+  if (this->has_requestauth()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *requestauth_);
+  }
+
+  // .BigPack.CsWheelEvent wheelEvent = 8;
+  if (this->has_wheelevent()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *wheelevent_);
   }
 
   // .BigPack.Exchange.DataType type = 1;
@@ -568,6 +693,12 @@ void Exchange::MergeFrom(const Exchange& from) {
   if (from.targetid().size() > 0) {
     _internal_set_targetid(from._internal_targetid());
   }
+  if (from.has_requestauth()) {
+    _internal_mutable_requestauth()->::BigPack::CsRequestAuth::MergeFrom(from._internal_requestauth());
+  }
+  if (from.has_wheelevent()) {
+    _internal_mutable_wheelevent()->::BigPack::CsWheelEvent::MergeFrom(from._internal_wheelevent());
+  }
   if (from.type() != 0) {
     _internal_set_type(from._internal_type());
   }
@@ -615,9 +746,9 @@ void Exchange::InternalSwap(Exchange* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(Exchange, errorcode_)
       + sizeof(Exchange::errorcode_)
-      - PROTOBUF_FIELD_OFFSET(Exchange, type_)>(
-          reinterpret_cast<char*>(&type_),
-          reinterpret_cast<char*>(&other->type_));
+      - PROTOBUF_FIELD_OFFSET(Exchange, requestauth_)>(
+          reinterpret_cast<char*>(&requestauth_),
+          reinterpret_cast<char*>(&other->requestauth_));
   swap(dataBody_, other->dataBody_);
   swap(_oneof_case_[0], other->_oneof_case_[0]);
 }
@@ -1316,6 +1447,395 @@ void ScReplyInfo::InternalSwap(ScReplyInfo* other) {
       file_level_metadata_Exchange_2eproto[3]);
 }
 
+// ===================================================================
+
+class CsRequestAuth::_Internal {
+ public:
+};
+
+CsRequestAuth::CsRequestAuth(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:BigPack.CsRequestAuth)
+}
+CsRequestAuth::CsRequestAuth(const CsRequestAuth& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  password_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_password().empty()) {
+    password_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_password(), 
+      GetArena());
+  }
+  // @@protoc_insertion_point(copy_constructor:BigPack.CsRequestAuth)
+}
+
+void CsRequestAuth::SharedCtor() {
+password_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+CsRequestAuth::~CsRequestAuth() {
+  // @@protoc_insertion_point(destructor:BigPack.CsRequestAuth)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void CsRequestAuth::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  password_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void CsRequestAuth::ArenaDtor(void* object) {
+  CsRequestAuth* _this = reinterpret_cast< CsRequestAuth* >(object);
+  (void)_this;
+}
+void CsRequestAuth::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void CsRequestAuth::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void CsRequestAuth::Clear() {
+// @@protoc_insertion_point(message_clear_start:BigPack.CsRequestAuth)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  password_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CsRequestAuth::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string password = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          auto str = _internal_mutable_password();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "BigPack.CsRequestAuth.password"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* CsRequestAuth::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:BigPack.CsRequestAuth)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string password = 1;
+  if (this->password().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_password().data(), static_cast<int>(this->_internal_password().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "BigPack.CsRequestAuth.password");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_password(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:BigPack.CsRequestAuth)
+  return target;
+}
+
+size_t CsRequestAuth::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:BigPack.CsRequestAuth)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string password = 1;
+  if (this->password().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_password());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void CsRequestAuth::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BigPack.CsRequestAuth)
+  GOOGLE_DCHECK_NE(&from, this);
+  const CsRequestAuth* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<CsRequestAuth>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BigPack.CsRequestAuth)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BigPack.CsRequestAuth)
+    MergeFrom(*source);
+  }
+}
+
+void CsRequestAuth::MergeFrom(const CsRequestAuth& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BigPack.CsRequestAuth)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.password().size() > 0) {
+    _internal_set_password(from._internal_password());
+  }
+}
+
+void CsRequestAuth::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BigPack.CsRequestAuth)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CsRequestAuth::CopyFrom(const CsRequestAuth& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BigPack.CsRequestAuth)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CsRequestAuth::IsInitialized() const {
+  return true;
+}
+
+void CsRequestAuth::InternalSwap(CsRequestAuth* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  password_.Swap(&other->password_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CsRequestAuth::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_Exchange_2eproto_getter, &descriptor_table_Exchange_2eproto_once,
+      file_level_metadata_Exchange_2eproto[4]);
+}
+
+// ===================================================================
+
+class CsWheelEvent::_Internal {
+ public:
+};
+
+CsWheelEvent::CsWheelEvent(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:BigPack.CsWheelEvent)
+}
+CsWheelEvent::CsWheelEvent(const CsWheelEvent& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  deltapos_ = from.deltapos_;
+  // @@protoc_insertion_point(copy_constructor:BigPack.CsWheelEvent)
+}
+
+void CsWheelEvent::SharedCtor() {
+deltapos_ = false;
+}
+
+CsWheelEvent::~CsWheelEvent() {
+  // @@protoc_insertion_point(destructor:BigPack.CsWheelEvent)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void CsWheelEvent::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void CsWheelEvent::ArenaDtor(void* object) {
+  CsWheelEvent* _this = reinterpret_cast< CsWheelEvent* >(object);
+  (void)_this;
+}
+void CsWheelEvent::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void CsWheelEvent::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void CsWheelEvent::Clear() {
+// @@protoc_insertion_point(message_clear_start:BigPack.CsWheelEvent)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  deltapos_ = false;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CsWheelEvent::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool deltapos = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          deltapos_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* CsWheelEvent::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:BigPack.CsWheelEvent)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool deltapos = 1;
+  if (this->deltapos() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_deltapos(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:BigPack.CsWheelEvent)
+  return target;
+}
+
+size_t CsWheelEvent::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:BigPack.CsWheelEvent)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bool deltapos = 1;
+  if (this->deltapos() != 0) {
+    total_size += 1 + 1;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void CsWheelEvent::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BigPack.CsWheelEvent)
+  GOOGLE_DCHECK_NE(&from, this);
+  const CsWheelEvent* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<CsWheelEvent>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BigPack.CsWheelEvent)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BigPack.CsWheelEvent)
+    MergeFrom(*source);
+  }
+}
+
+void CsWheelEvent::MergeFrom(const CsWheelEvent& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BigPack.CsWheelEvent)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.deltapos() != 0) {
+    _internal_set_deltapos(from._internal_deltapos());
+  }
+}
+
+void CsWheelEvent::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BigPack.CsWheelEvent)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CsWheelEvent::CopyFrom(const CsWheelEvent& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BigPack.CsWheelEvent)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CsWheelEvent::IsInitialized() const {
+  return true;
+}
+
+void CsWheelEvent::InternalSwap(CsWheelEvent* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  swap(deltapos_, other->deltapos_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CsWheelEvent::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_Exchange_2eproto_getter, &descriptor_table_Exchange_2eproto_once,
+      file_level_metadata_Exchange_2eproto[5]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace BigPack
 PROTOBUF_NAMESPACE_OPEN
@@ -1330,6 +1850,12 @@ template<> PROTOBUF_NOINLINE ::BigPack::CsHostInfo* Arena::CreateMaybeMessage< :
 }
 template<> PROTOBUF_NOINLINE ::BigPack::ScReplyInfo* Arena::CreateMaybeMessage< ::BigPack::ScReplyInfo >(Arena* arena) {
   return Arena::CreateMessageInternal< ::BigPack::ScReplyInfo >(arena);
+}
+template<> PROTOBUF_NOINLINE ::BigPack::CsRequestAuth* Arena::CreateMaybeMessage< ::BigPack::CsRequestAuth >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::BigPack::CsRequestAuth >(arena);
+}
+template<> PROTOBUF_NOINLINE ::BigPack::CsWheelEvent* Arena::CreateMaybeMessage< ::BigPack::CsWheelEvent >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::BigPack::CsWheelEvent >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

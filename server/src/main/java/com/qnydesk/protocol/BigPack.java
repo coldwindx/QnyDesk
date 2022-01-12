@@ -89,6 +89,36 @@ public final class BigPack {
      */
     com.qnydesk.protocol.BigPack.ScReplyInfoOrBuilder getReplyInfoOrBuilder();
 
+    /**
+     * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+     * @return Whether the requestAuth field is set.
+     */
+    boolean hasRequestAuth();
+    /**
+     * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+     * @return The requestAuth.
+     */
+    com.qnydesk.protocol.BigPack.CsRequestAuth getRequestAuth();
+    /**
+     * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+     */
+    com.qnydesk.protocol.BigPack.CsRequestAuthOrBuilder getRequestAuthOrBuilder();
+
+    /**
+     * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+     * @return Whether the wheelEvent field is set.
+     */
+    boolean hasWheelEvent();
+    /**
+     * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+     * @return The wheelEvent.
+     */
+    com.qnydesk.protocol.BigPack.CsWheelEvent getWheelEvent();
+    /**
+     * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+     */
+    com.qnydesk.protocol.BigPack.CsWheelEventOrBuilder getWheelEventOrBuilder();
+
     public com.qnydesk.protocol.BigPack.Exchange.DataBodyCase getDataBodyCase();
   }
   /**
@@ -194,6 +224,32 @@ public final class BigPack {
               dataBodyCase_ = 6;
               break;
             }
+            case 58: {
+              com.qnydesk.protocol.BigPack.CsRequestAuth.Builder subBuilder = null;
+              if (requestAuth_ != null) {
+                subBuilder = requestAuth_.toBuilder();
+              }
+              requestAuth_ = input.readMessage(com.qnydesk.protocol.BigPack.CsRequestAuth.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(requestAuth_);
+                requestAuth_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 66: {
+              com.qnydesk.protocol.BigPack.CsWheelEvent.Builder subBuilder = null;
+              if (wheelEvent_ != null) {
+                subBuilder = wheelEvent_.toBuilder();
+              }
+              wheelEvent_ = input.readMessage(com.qnydesk.protocol.BigPack.CsWheelEvent.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(wheelEvent_);
+                wheelEvent_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -255,6 +311,14 @@ public final class BigPack {
        * <code>TypeReplyRegisterDetails = 2;</code>
        */
       TypeReplyRegisterDetails(2),
+      /**
+       * <pre>
+       * 认证请求
+       * </pre>
+       *
+       * <code>TypeRequestAuth = 3;</code>
+       */
+      TypeRequestAuth(3),
       UNRECOGNIZED(-1),
       ;
 
@@ -282,6 +346,14 @@ public final class BigPack {
        * <code>TypeReplyRegisterDetails = 2;</code>
        */
       public static final int TypeReplyRegisterDetails_VALUE = 2;
+      /**
+       * <pre>
+       * 认证请求
+       * </pre>
+       *
+       * <code>TypeRequestAuth = 3;</code>
+       */
+      public static final int TypeRequestAuth_VALUE = 3;
 
 
       public final int getNumber() {
@@ -311,6 +383,7 @@ public final class BigPack {
           case 0: return TypeHeartBeat;
           case 1: return TypeRegisterHost;
           case 2: return TypeReplyRegisterDetails;
+          case 3: return TypeRequestAuth;
           default: return null;
         }
       }
@@ -576,6 +649,58 @@ public final class BigPack {
       return com.qnydesk.protocol.BigPack.ScReplyInfo.getDefaultInstance();
     }
 
+    public static final int REQUESTAUTH_FIELD_NUMBER = 7;
+    private com.qnydesk.protocol.BigPack.CsRequestAuth requestAuth_;
+    /**
+     * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+     * @return Whether the requestAuth field is set.
+     */
+    @java.lang.Override
+    public boolean hasRequestAuth() {
+      return requestAuth_ != null;
+    }
+    /**
+     * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+     * @return The requestAuth.
+     */
+    @java.lang.Override
+    public com.qnydesk.protocol.BigPack.CsRequestAuth getRequestAuth() {
+      return requestAuth_ == null ? com.qnydesk.protocol.BigPack.CsRequestAuth.getDefaultInstance() : requestAuth_;
+    }
+    /**
+     * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+     */
+    @java.lang.Override
+    public com.qnydesk.protocol.BigPack.CsRequestAuthOrBuilder getRequestAuthOrBuilder() {
+      return getRequestAuth();
+    }
+
+    public static final int WHEELEVENT_FIELD_NUMBER = 8;
+    private com.qnydesk.protocol.BigPack.CsWheelEvent wheelEvent_;
+    /**
+     * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+     * @return Whether the wheelEvent field is set.
+     */
+    @java.lang.Override
+    public boolean hasWheelEvent() {
+      return wheelEvent_ != null;
+    }
+    /**
+     * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+     * @return The wheelEvent.
+     */
+    @java.lang.Override
+    public com.qnydesk.protocol.BigPack.CsWheelEvent getWheelEvent() {
+      return wheelEvent_ == null ? com.qnydesk.protocol.BigPack.CsWheelEvent.getDefaultInstance() : wheelEvent_;
+    }
+    /**
+     * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+     */
+    @java.lang.Override
+    public com.qnydesk.protocol.BigPack.CsWheelEventOrBuilder getWheelEventOrBuilder() {
+      return getWheelEvent();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -608,6 +733,12 @@ public final class BigPack {
       if (dataBodyCase_ == 6) {
         output.writeMessage(6, (com.qnydesk.protocol.BigPack.ScReplyInfo) dataBody_);
       }
+      if (requestAuth_ != null) {
+        output.writeMessage(7, getRequestAuth());
+      }
+      if (wheelEvent_ != null) {
+        output.writeMessage(8, getWheelEvent());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -639,6 +770,14 @@ public final class BigPack {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, (com.qnydesk.protocol.BigPack.ScReplyInfo) dataBody_);
       }
+      if (requestAuth_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, getRequestAuth());
+      }
+      if (wheelEvent_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getWheelEvent());
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -661,6 +800,16 @@ public final class BigPack {
           .equals(other.getTargetId())) return false;
       if (getErrorCode()
           != other.getErrorCode()) return false;
+      if (hasRequestAuth() != other.hasRequestAuth()) return false;
+      if (hasRequestAuth()) {
+        if (!getRequestAuth()
+            .equals(other.getRequestAuth())) return false;
+      }
+      if (hasWheelEvent() != other.hasWheelEvent()) return false;
+      if (hasWheelEvent()) {
+        if (!getWheelEvent()
+            .equals(other.getWheelEvent())) return false;
+      }
       if (!getDataBodyCase().equals(other.getDataBodyCase())) return false;
       switch (dataBodyCase_) {
         case 5:
@@ -693,6 +842,14 @@ public final class BigPack {
       hash = (53 * hash) + getTargetId().hashCode();
       hash = (37 * hash) + ERRORCODE_FIELD_NUMBER;
       hash = (53 * hash) + getErrorCode();
+      if (hasRequestAuth()) {
+        hash = (37 * hash) + REQUESTAUTH_FIELD_NUMBER;
+        hash = (53 * hash) + getRequestAuth().hashCode();
+      }
+      if (hasWheelEvent()) {
+        hash = (37 * hash) + WHEELEVENT_FIELD_NUMBER;
+        hash = (53 * hash) + getWheelEvent().hashCode();
+      }
       switch (dataBodyCase_) {
         case 5:
           hash = (37 * hash) + HOSTINFO_FIELD_NUMBER;
@@ -850,6 +1007,18 @@ public final class BigPack {
 
         errorCode_ = 0;
 
+        if (requestAuthBuilder_ == null) {
+          requestAuth_ = null;
+        } else {
+          requestAuth_ = null;
+          requestAuthBuilder_ = null;
+        }
+        if (wheelEventBuilder_ == null) {
+          wheelEvent_ = null;
+        } else {
+          wheelEvent_ = null;
+          wheelEventBuilder_ = null;
+        }
         dataBodyCase_ = 0;
         dataBody_ = null;
         return this;
@@ -895,6 +1064,16 @@ public final class BigPack {
           } else {
             result.dataBody_ = replyInfoBuilder_.build();
           }
+        }
+        if (requestAuthBuilder_ == null) {
+          result.requestAuth_ = requestAuth_;
+        } else {
+          result.requestAuth_ = requestAuthBuilder_.build();
+        }
+        if (wheelEventBuilder_ == null) {
+          result.wheelEvent_ = wheelEvent_;
+        } else {
+          result.wheelEvent_ = wheelEventBuilder_.build();
         }
         result.dataBodyCase_ = dataBodyCase_;
         onBuilt();
@@ -958,6 +1137,12 @@ public final class BigPack {
         }
         if (other.getErrorCode() != 0) {
           setErrorCode(other.getErrorCode());
+        }
+        if (other.hasRequestAuth()) {
+          mergeRequestAuth(other.getRequestAuth());
+        }
+        if (other.hasWheelEvent()) {
+          mergeWheelEvent(other.getWheelEvent());
         }
         switch (other.getDataBodyCase()) {
           case HOSTINFO: {
@@ -1534,6 +1719,244 @@ public final class BigPack {
         onChanged();;
         return replyInfoBuilder_;
       }
+
+      private com.qnydesk.protocol.BigPack.CsRequestAuth requestAuth_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.qnydesk.protocol.BigPack.CsRequestAuth, com.qnydesk.protocol.BigPack.CsRequestAuth.Builder, com.qnydesk.protocol.BigPack.CsRequestAuthOrBuilder> requestAuthBuilder_;
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       * @return Whether the requestAuth field is set.
+       */
+      public boolean hasRequestAuth() {
+        return requestAuthBuilder_ != null || requestAuth_ != null;
+      }
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       * @return The requestAuth.
+       */
+      public com.qnydesk.protocol.BigPack.CsRequestAuth getRequestAuth() {
+        if (requestAuthBuilder_ == null) {
+          return requestAuth_ == null ? com.qnydesk.protocol.BigPack.CsRequestAuth.getDefaultInstance() : requestAuth_;
+        } else {
+          return requestAuthBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       */
+      public Builder setRequestAuth(com.qnydesk.protocol.BigPack.CsRequestAuth value) {
+        if (requestAuthBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          requestAuth_ = value;
+          onChanged();
+        } else {
+          requestAuthBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       */
+      public Builder setRequestAuth(
+          com.qnydesk.protocol.BigPack.CsRequestAuth.Builder builderForValue) {
+        if (requestAuthBuilder_ == null) {
+          requestAuth_ = builderForValue.build();
+          onChanged();
+        } else {
+          requestAuthBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       */
+      public Builder mergeRequestAuth(com.qnydesk.protocol.BigPack.CsRequestAuth value) {
+        if (requestAuthBuilder_ == null) {
+          if (requestAuth_ != null) {
+            requestAuth_ =
+              com.qnydesk.protocol.BigPack.CsRequestAuth.newBuilder(requestAuth_).mergeFrom(value).buildPartial();
+          } else {
+            requestAuth_ = value;
+          }
+          onChanged();
+        } else {
+          requestAuthBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       */
+      public Builder clearRequestAuth() {
+        if (requestAuthBuilder_ == null) {
+          requestAuth_ = null;
+          onChanged();
+        } else {
+          requestAuth_ = null;
+          requestAuthBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       */
+      public com.qnydesk.protocol.BigPack.CsRequestAuth.Builder getRequestAuthBuilder() {
+        
+        onChanged();
+        return getRequestAuthFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       */
+      public com.qnydesk.protocol.BigPack.CsRequestAuthOrBuilder getRequestAuthOrBuilder() {
+        if (requestAuthBuilder_ != null) {
+          return requestAuthBuilder_.getMessageOrBuilder();
+        } else {
+          return requestAuth_ == null ?
+              com.qnydesk.protocol.BigPack.CsRequestAuth.getDefaultInstance() : requestAuth_;
+        }
+      }
+      /**
+       * <code>.BigPack.CsRequestAuth requestAuth = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.qnydesk.protocol.BigPack.CsRequestAuth, com.qnydesk.protocol.BigPack.CsRequestAuth.Builder, com.qnydesk.protocol.BigPack.CsRequestAuthOrBuilder> 
+          getRequestAuthFieldBuilder() {
+        if (requestAuthBuilder_ == null) {
+          requestAuthBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.qnydesk.protocol.BigPack.CsRequestAuth, com.qnydesk.protocol.BigPack.CsRequestAuth.Builder, com.qnydesk.protocol.BigPack.CsRequestAuthOrBuilder>(
+                  getRequestAuth(),
+                  getParentForChildren(),
+                  isClean());
+          requestAuth_ = null;
+        }
+        return requestAuthBuilder_;
+      }
+
+      private com.qnydesk.protocol.BigPack.CsWheelEvent wheelEvent_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.qnydesk.protocol.BigPack.CsWheelEvent, com.qnydesk.protocol.BigPack.CsWheelEvent.Builder, com.qnydesk.protocol.BigPack.CsWheelEventOrBuilder> wheelEventBuilder_;
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       * @return Whether the wheelEvent field is set.
+       */
+      public boolean hasWheelEvent() {
+        return wheelEventBuilder_ != null || wheelEvent_ != null;
+      }
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       * @return The wheelEvent.
+       */
+      public com.qnydesk.protocol.BigPack.CsWheelEvent getWheelEvent() {
+        if (wheelEventBuilder_ == null) {
+          return wheelEvent_ == null ? com.qnydesk.protocol.BigPack.CsWheelEvent.getDefaultInstance() : wheelEvent_;
+        } else {
+          return wheelEventBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       */
+      public Builder setWheelEvent(com.qnydesk.protocol.BigPack.CsWheelEvent value) {
+        if (wheelEventBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          wheelEvent_ = value;
+          onChanged();
+        } else {
+          wheelEventBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       */
+      public Builder setWheelEvent(
+          com.qnydesk.protocol.BigPack.CsWheelEvent.Builder builderForValue) {
+        if (wheelEventBuilder_ == null) {
+          wheelEvent_ = builderForValue.build();
+          onChanged();
+        } else {
+          wheelEventBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       */
+      public Builder mergeWheelEvent(com.qnydesk.protocol.BigPack.CsWheelEvent value) {
+        if (wheelEventBuilder_ == null) {
+          if (wheelEvent_ != null) {
+            wheelEvent_ =
+              com.qnydesk.protocol.BigPack.CsWheelEvent.newBuilder(wheelEvent_).mergeFrom(value).buildPartial();
+          } else {
+            wheelEvent_ = value;
+          }
+          onChanged();
+        } else {
+          wheelEventBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       */
+      public Builder clearWheelEvent() {
+        if (wheelEventBuilder_ == null) {
+          wheelEvent_ = null;
+          onChanged();
+        } else {
+          wheelEvent_ = null;
+          wheelEventBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       */
+      public com.qnydesk.protocol.BigPack.CsWheelEvent.Builder getWheelEventBuilder() {
+        
+        onChanged();
+        return getWheelEventFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       */
+      public com.qnydesk.protocol.BigPack.CsWheelEventOrBuilder getWheelEventOrBuilder() {
+        if (wheelEventBuilder_ != null) {
+          return wheelEventBuilder_.getMessageOrBuilder();
+        } else {
+          return wheelEvent_ == null ?
+              com.qnydesk.protocol.BigPack.CsWheelEvent.getDefaultInstance() : wheelEvent_;
+        }
+      }
+      /**
+       * <code>.BigPack.CsWheelEvent wheelEvent = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.qnydesk.protocol.BigPack.CsWheelEvent, com.qnydesk.protocol.BigPack.CsWheelEvent.Builder, com.qnydesk.protocol.BigPack.CsWheelEventOrBuilder> 
+          getWheelEventFieldBuilder() {
+        if (wheelEventBuilder_ == null) {
+          wheelEventBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.qnydesk.protocol.BigPack.CsWheelEvent, com.qnydesk.protocol.BigPack.CsWheelEvent.Builder, com.qnydesk.protocol.BigPack.CsWheelEventOrBuilder>(
+                  getWheelEvent(),
+                  getParentForChildren(),
+                  isClean());
+          wheelEvent_ = null;
+        }
+        return wheelEventBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2022,11 +2445,19 @@ public final class BigPack {
         getCpuIdBytes();
 
     /**
+     * <pre>
+     * 硬盘ID
+     * </pre>
+     *
      * <code>string deviceId = 2;</code>
      * @return The deviceId.
      */
     java.lang.String getDeviceId();
     /**
+     * <pre>
+     * 硬盘ID
+     * </pre>
+     *
      * <code>string deviceId = 2;</code>
      * @return The bytes for deviceId.
      */
@@ -2195,6 +2626,10 @@ public final class BigPack {
     public static final int DEVICEID_FIELD_NUMBER = 2;
     private volatile java.lang.Object deviceId_;
     /**
+     * <pre>
+     * 硬盘ID
+     * </pre>
+     *
      * <code>string deviceId = 2;</code>
      * @return The deviceId.
      */
@@ -2212,6 +2647,10 @@ public final class BigPack {
       }
     }
     /**
+     * <pre>
+     * 硬盘ID
+     * </pre>
+     *
      * <code>string deviceId = 2;</code>
      * @return The bytes for deviceId.
      */
@@ -2710,6 +3149,10 @@ public final class BigPack {
 
       private java.lang.Object deviceId_ = "";
       /**
+       * <pre>
+       * 硬盘ID
+       * </pre>
+       *
        * <code>string deviceId = 2;</code>
        * @return The deviceId.
        */
@@ -2726,6 +3169,10 @@ public final class BigPack {
         }
       }
       /**
+       * <pre>
+       * 硬盘ID
+       * </pre>
+       *
        * <code>string deviceId = 2;</code>
        * @return The bytes for deviceId.
        */
@@ -2743,6 +3190,10 @@ public final class BigPack {
         }
       }
       /**
+       * <pre>
+       * 硬盘ID
+       * </pre>
+       *
        * <code>string deviceId = 2;</code>
        * @param value The deviceId to set.
        * @return This builder for chaining.
@@ -2758,6 +3209,10 @@ public final class BigPack {
         return this;
       }
       /**
+       * <pre>
+       * 硬盘ID
+       * </pre>
+       *
        * <code>string deviceId = 2;</code>
        * @return This builder for chaining.
        */
@@ -2768,6 +3223,10 @@ public final class BigPack {
         return this;
       }
       /**
+       * <pre>
+       * 硬盘ID
+       * </pre>
+       *
        * <code>string deviceId = 2;</code>
        * @param value The bytes for deviceId to set.
        * @return This builder for chaining.
@@ -3582,6 +4041,1063 @@ public final class BigPack {
 
   }
 
+  public interface CsRequestAuthOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:BigPack.CsRequestAuth)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string password = 1;</code>
+     * @return The password.
+     */
+    java.lang.String getPassword();
+    /**
+     * <code>string password = 1;</code>
+     * @return The bytes for password.
+     */
+    com.google.protobuf.ByteString
+        getPasswordBytes();
+  }
+  /**
+   * Protobuf type {@code BigPack.CsRequestAuth}
+   */
+  public static final class CsRequestAuth extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:BigPack.CsRequestAuth)
+      CsRequestAuthOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CsRequestAuth.newBuilder() to construct.
+    private CsRequestAuth(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CsRequestAuth() {
+      password_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CsRequestAuth();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CsRequestAuth(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              password_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsRequestAuth_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsRequestAuth_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.qnydesk.protocol.BigPack.CsRequestAuth.class, com.qnydesk.protocol.BigPack.CsRequestAuth.Builder.class);
+    }
+
+    public static final int PASSWORD_FIELD_NUMBER = 1;
+    private volatile java.lang.Object password_;
+    /**
+     * <code>string password = 1;</code>
+     * @return The password.
+     */
+    @java.lang.Override
+    public java.lang.String getPassword() {
+      java.lang.Object ref = password_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        password_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string password = 1;</code>
+     * @return The bytes for password.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPasswordBytes() {
+      java.lang.Object ref = password_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        password_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getPasswordBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, password_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getPasswordBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, password_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.qnydesk.protocol.BigPack.CsRequestAuth)) {
+        return super.equals(obj);
+      }
+      com.qnydesk.protocol.BigPack.CsRequestAuth other = (com.qnydesk.protocol.BigPack.CsRequestAuth) obj;
+
+      if (!getPassword()
+          .equals(other.getPassword())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
+      hash = (53 * hash) + getPassword().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.qnydesk.protocol.BigPack.CsRequestAuth prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code BigPack.CsRequestAuth}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:BigPack.CsRequestAuth)
+        com.qnydesk.protocol.BigPack.CsRequestAuthOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsRequestAuth_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsRequestAuth_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.qnydesk.protocol.BigPack.CsRequestAuth.class, com.qnydesk.protocol.BigPack.CsRequestAuth.Builder.class);
+      }
+
+      // Construct using com.qnydesk.protocol.BigPack.CsRequestAuth.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        password_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsRequestAuth_descriptor;
+      }
+
+      @java.lang.Override
+      public com.qnydesk.protocol.BigPack.CsRequestAuth getDefaultInstanceForType() {
+        return com.qnydesk.protocol.BigPack.CsRequestAuth.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.qnydesk.protocol.BigPack.CsRequestAuth build() {
+        com.qnydesk.protocol.BigPack.CsRequestAuth result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.qnydesk.protocol.BigPack.CsRequestAuth buildPartial() {
+        com.qnydesk.protocol.BigPack.CsRequestAuth result = new com.qnydesk.protocol.BigPack.CsRequestAuth(this);
+        result.password_ = password_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.qnydesk.protocol.BigPack.CsRequestAuth) {
+          return mergeFrom((com.qnydesk.protocol.BigPack.CsRequestAuth)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.qnydesk.protocol.BigPack.CsRequestAuth other) {
+        if (other == com.qnydesk.protocol.BigPack.CsRequestAuth.getDefaultInstance()) return this;
+        if (!other.getPassword().isEmpty()) {
+          password_ = other.password_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.qnydesk.protocol.BigPack.CsRequestAuth parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.qnydesk.protocol.BigPack.CsRequestAuth) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object password_ = "";
+      /**
+       * <code>string password = 1;</code>
+       * @return The password.
+       */
+      public java.lang.String getPassword() {
+        java.lang.Object ref = password_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          password_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string password = 1;</code>
+       * @return The bytes for password.
+       */
+      public com.google.protobuf.ByteString
+          getPasswordBytes() {
+        java.lang.Object ref = password_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          password_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string password = 1;</code>
+       * @param value The password to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPassword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        password_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string password = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPassword() {
+        
+        password_ = getDefaultInstance().getPassword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string password = 1;</code>
+       * @param value The bytes for password to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        password_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:BigPack.CsRequestAuth)
+    }
+
+    // @@protoc_insertion_point(class_scope:BigPack.CsRequestAuth)
+    private static final com.qnydesk.protocol.BigPack.CsRequestAuth DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.qnydesk.protocol.BigPack.CsRequestAuth();
+    }
+
+    public static com.qnydesk.protocol.BigPack.CsRequestAuth getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CsRequestAuth>
+        PARSER = new com.google.protobuf.AbstractParser<CsRequestAuth>() {
+      @java.lang.Override
+      public CsRequestAuth parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CsRequestAuth(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CsRequestAuth> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CsRequestAuth> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.qnydesk.protocol.BigPack.CsRequestAuth getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface CsWheelEventOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:BigPack.CsWheelEvent)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bool deltapos = 1;</code>
+     * @return The deltapos.
+     */
+    boolean getDeltapos();
+  }
+  /**
+   * Protobuf type {@code BigPack.CsWheelEvent}
+   */
+  public static final class CsWheelEvent extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:BigPack.CsWheelEvent)
+      CsWheelEventOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CsWheelEvent.newBuilder() to construct.
+    private CsWheelEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CsWheelEvent() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CsWheelEvent();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CsWheelEvent(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              deltapos_ = input.readBool();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsWheelEvent_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsWheelEvent_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.qnydesk.protocol.BigPack.CsWheelEvent.class, com.qnydesk.protocol.BigPack.CsWheelEvent.Builder.class);
+    }
+
+    public static final int DELTAPOS_FIELD_NUMBER = 1;
+    private boolean deltapos_;
+    /**
+     * <code>bool deltapos = 1;</code>
+     * @return The deltapos.
+     */
+    @java.lang.Override
+    public boolean getDeltapos() {
+      return deltapos_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (deltapos_ != false) {
+        output.writeBool(1, deltapos_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (deltapos_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, deltapos_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.qnydesk.protocol.BigPack.CsWheelEvent)) {
+        return super.equals(obj);
+      }
+      com.qnydesk.protocol.BigPack.CsWheelEvent other = (com.qnydesk.protocol.BigPack.CsWheelEvent) obj;
+
+      if (getDeltapos()
+          != other.getDeltapos()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DELTAPOS_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getDeltapos());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.qnydesk.protocol.BigPack.CsWheelEvent prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code BigPack.CsWheelEvent}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:BigPack.CsWheelEvent)
+        com.qnydesk.protocol.BigPack.CsWheelEventOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsWheelEvent_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsWheelEvent_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.qnydesk.protocol.BigPack.CsWheelEvent.class, com.qnydesk.protocol.BigPack.CsWheelEvent.Builder.class);
+      }
+
+      // Construct using com.qnydesk.protocol.BigPack.CsWheelEvent.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        deltapos_ = false;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.qnydesk.protocol.BigPack.internal_static_BigPack_CsWheelEvent_descriptor;
+      }
+
+      @java.lang.Override
+      public com.qnydesk.protocol.BigPack.CsWheelEvent getDefaultInstanceForType() {
+        return com.qnydesk.protocol.BigPack.CsWheelEvent.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.qnydesk.protocol.BigPack.CsWheelEvent build() {
+        com.qnydesk.protocol.BigPack.CsWheelEvent result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.qnydesk.protocol.BigPack.CsWheelEvent buildPartial() {
+        com.qnydesk.protocol.BigPack.CsWheelEvent result = new com.qnydesk.protocol.BigPack.CsWheelEvent(this);
+        result.deltapos_ = deltapos_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.qnydesk.protocol.BigPack.CsWheelEvent) {
+          return mergeFrom((com.qnydesk.protocol.BigPack.CsWheelEvent)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.qnydesk.protocol.BigPack.CsWheelEvent other) {
+        if (other == com.qnydesk.protocol.BigPack.CsWheelEvent.getDefaultInstance()) return this;
+        if (other.getDeltapos() != false) {
+          setDeltapos(other.getDeltapos());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.qnydesk.protocol.BigPack.CsWheelEvent parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.qnydesk.protocol.BigPack.CsWheelEvent) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private boolean deltapos_ ;
+      /**
+       * <code>bool deltapos = 1;</code>
+       * @return The deltapos.
+       */
+      @java.lang.Override
+      public boolean getDeltapos() {
+        return deltapos_;
+      }
+      /**
+       * <code>bool deltapos = 1;</code>
+       * @param value The deltapos to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDeltapos(boolean value) {
+        
+        deltapos_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool deltapos = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDeltapos() {
+        
+        deltapos_ = false;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:BigPack.CsWheelEvent)
+    }
+
+    // @@protoc_insertion_point(class_scope:BigPack.CsWheelEvent)
+    private static final com.qnydesk.protocol.BigPack.CsWheelEvent DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.qnydesk.protocol.BigPack.CsWheelEvent();
+    }
+
+    public static com.qnydesk.protocol.BigPack.CsWheelEvent getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CsWheelEvent>
+        PARSER = new com.google.protobuf.AbstractParser<CsWheelEvent>() {
+      @java.lang.Override
+      public CsWheelEvent parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CsWheelEvent(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CsWheelEvent> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CsWheelEvent> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.qnydesk.protocol.BigPack.CsWheelEvent getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_BigPack_Exchange_descriptor;
   private static final 
@@ -3602,6 +5118,16 @@ public final class BigPack {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_BigPack_ScReplyInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_BigPack_CsRequestAuth_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_BigPack_CsRequestAuth_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_BigPack_CsWheelEvent_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_BigPack_CsWheelEvent_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3611,19 +5137,24 @@ public final class BigPack {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016Exchange.proto\022\007BigPack\"\240\002\n\010Exchange\022(" +
+      "\n\016Exchange.proto\022\007BigPack\"\215\003\n\010Exchange\022(" +
       "\n\004type\030\001 \001(\0162\032.BigPack.Exchange.DataType" +
       "\022\022\n\nresourceId\030\002 \001(\t\022\020\n\010targetId\030\003 \001(\t\022\021" +
       "\n\terrorCode\030\004 \001(\005\022\'\n\010hostInfo\030\005 \001(\0132\023.Bi" +
       "gPack.CsHostInfoH\000\022)\n\treplyInfo\030\006 \001(\0132\024." +
-      "BigPack.ScReplyInfoH\000\"Q\n\010DataType\022\021\n\rTyp" +
-      "eHeartBeat\020\000\022\024\n\020TypeRegisterHost\020\001\022\034\n\030Ty" +
-      "peReplyRegisterDetails\020\002B\n\n\010dataBody\"\r\n\013" +
-      "WMHeartBeat\"Q\n\nCsHostInfo\022\r\n\005cpuId\030\001 \001(\t" +
-      "\022\020\n\010deviceId\030\002 \001(\t\022\022\n\nmacAddress\030\003 \001(\t\022\016" +
-      "\n\006active\030\004 \001(\005\"2\n\013ScReplyInfo\022\017\n\007success" +
-      "\030\001 \001(\010\022\022\n\nregisterId\030\002 \001(\tB!\n\024com.qnydes" +
-      "k.protocolB\007BigPackH\001b\006proto3"
+      "BigPack.ScReplyInfoH\000\022+\n\013requestAuth\030\007 \001" +
+      "(\0132\026.BigPack.CsRequestAuth\022)\n\nwheelEvent" +
+      "\030\010 \001(\0132\025.BigPack.CsWheelEvent\"f\n\010DataTyp" +
+      "e\022\021\n\rTypeHeartBeat\020\000\022\024\n\020TypeRegisterHost" +
+      "\020\001\022\034\n\030TypeReplyRegisterDetails\020\002\022\023\n\017Type" +
+      "RequestAuth\020\003B\n\n\010dataBody\"\r\n\013WMHeartBeat" +
+      "\"Q\n\nCsHostInfo\022\r\n\005cpuId\030\001 \001(\t\022\020\n\010deviceI" +
+      "d\030\002 \001(\t\022\022\n\nmacAddress\030\003 \001(\t\022\016\n\006active\030\004 " +
+      "\001(\005\"2\n\013ScReplyInfo\022\017\n\007success\030\001 \001(\010\022\022\n\nr" +
+      "egisterId\030\002 \001(\t\"!\n\rCsRequestAuth\022\020\n\010pass" +
+      "word\030\001 \001(\t\" \n\014CsWheelEvent\022\020\n\010deltapos\030\001" +
+      " \001(\010B!\n\024com.qnydesk.protocolB\007BigPackH\001b" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3634,7 +5165,7 @@ public final class BigPack {
     internal_static_BigPack_Exchange_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BigPack_Exchange_descriptor,
-        new java.lang.String[] { "Type", "ResourceId", "TargetId", "ErrorCode", "HostInfo", "ReplyInfo", "DataBody", });
+        new java.lang.String[] { "Type", "ResourceId", "TargetId", "ErrorCode", "HostInfo", "ReplyInfo", "RequestAuth", "WheelEvent", "DataBody", });
     internal_static_BigPack_WMHeartBeat_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_BigPack_WMHeartBeat_fieldAccessorTable = new
@@ -3653,6 +5184,18 @@ public final class BigPack {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BigPack_ScReplyInfo_descriptor,
         new java.lang.String[] { "Success", "RegisterId", });
+    internal_static_BigPack_CsRequestAuth_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_BigPack_CsRequestAuth_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_BigPack_CsRequestAuth_descriptor,
+        new java.lang.String[] { "Password", });
+    internal_static_BigPack_CsWheelEvent_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_BigPack_CsWheelEvent_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_BigPack_CsWheelEvent_descriptor,
+        new java.lang.String[] { "Deltapos", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

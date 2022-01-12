@@ -47,7 +47,7 @@ struct TableStruct_Exchange_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[4]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -58,6 +58,12 @@ namespace BigPack {
 class CsHostInfo;
 struct CsHostInfoDefaultTypeInternal;
 extern CsHostInfoDefaultTypeInternal _CsHostInfo_default_instance_;
+class CsRequestAuth;
+struct CsRequestAuthDefaultTypeInternal;
+extern CsRequestAuthDefaultTypeInternal _CsRequestAuth_default_instance_;
+class CsWheelEvent;
+struct CsWheelEventDefaultTypeInternal;
+extern CsWheelEventDefaultTypeInternal _CsWheelEvent_default_instance_;
 class Exchange;
 struct ExchangeDefaultTypeInternal;
 extern ExchangeDefaultTypeInternal _Exchange_default_instance_;
@@ -70,6 +76,8 @@ extern WMHeartBeatDefaultTypeInternal _WMHeartBeat_default_instance_;
 }  // namespace BigPack
 PROTOBUF_NAMESPACE_OPEN
 template<> ::BigPack::CsHostInfo* Arena::CreateMaybeMessage<::BigPack::CsHostInfo>(Arena*);
+template<> ::BigPack::CsRequestAuth* Arena::CreateMaybeMessage<::BigPack::CsRequestAuth>(Arena*);
+template<> ::BigPack::CsWheelEvent* Arena::CreateMaybeMessage<::BigPack::CsWheelEvent>(Arena*);
 template<> ::BigPack::Exchange* Arena::CreateMaybeMessage<::BigPack::Exchange>(Arena*);
 template<> ::BigPack::ScReplyInfo* Arena::CreateMaybeMessage<::BigPack::ScReplyInfo>(Arena*);
 template<> ::BigPack::WMHeartBeat* Arena::CreateMaybeMessage<::BigPack::WMHeartBeat>(Arena*);
@@ -80,12 +88,13 @@ enum Exchange_DataType : int {
   Exchange_DataType_TypeHeartBeat = 0,
   Exchange_DataType_TypeRegisterHost = 1,
   Exchange_DataType_TypeReplyRegisterDetails = 2,
+  Exchange_DataType_TypeRequestAuth = 3,
   Exchange_DataType_Exchange_DataType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   Exchange_DataType_Exchange_DataType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool Exchange_DataType_IsValid(int value);
 constexpr Exchange_DataType Exchange_DataType_DataType_MIN = Exchange_DataType_TypeHeartBeat;
-constexpr Exchange_DataType Exchange_DataType_DataType_MAX = Exchange_DataType_TypeReplyRegisterDetails;
+constexpr Exchange_DataType Exchange_DataType_DataType_MAX = Exchange_DataType_TypeRequestAuth;
 constexpr int Exchange_DataType_DataType_ARRAYSIZE = Exchange_DataType_DataType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Exchange_DataType_descriptor();
@@ -221,6 +230,8 @@ class Exchange PROTOBUF_FINAL :
     Exchange_DataType_TypeRegisterHost;
   static constexpr DataType TypeReplyRegisterDetails =
     Exchange_DataType_TypeReplyRegisterDetails;
+  static constexpr DataType TypeRequestAuth =
+    Exchange_DataType_TypeRequestAuth;
   static inline bool DataType_IsValid(int value) {
     return Exchange_DataType_IsValid(value);
   }
@@ -251,6 +262,8 @@ class Exchange PROTOBUF_FINAL :
   enum : int {
     kResourceIdFieldNumber = 2,
     kTargetIdFieldNumber = 3,
+    kRequestAuthFieldNumber = 7,
+    kWheelEventFieldNumber = 8,
     kTypeFieldNumber = 1,
     kErrorCodeFieldNumber = 4,
     kHostInfoFieldNumber = 5,
@@ -283,6 +296,42 @@ class Exchange PROTOBUF_FINAL :
   void _internal_set_targetid(const std::string& value);
   std::string* _internal_mutable_targetid();
   public:
+
+  // .BigPack.CsRequestAuth requestAuth = 7;
+  bool has_requestauth() const;
+  private:
+  bool _internal_has_requestauth() const;
+  public:
+  void clear_requestauth();
+  const ::BigPack::CsRequestAuth& requestauth() const;
+  ::BigPack::CsRequestAuth* release_requestauth();
+  ::BigPack::CsRequestAuth* mutable_requestauth();
+  void set_allocated_requestauth(::BigPack::CsRequestAuth* requestauth);
+  private:
+  const ::BigPack::CsRequestAuth& _internal_requestauth() const;
+  ::BigPack::CsRequestAuth* _internal_mutable_requestauth();
+  public:
+  void unsafe_arena_set_allocated_requestauth(
+      ::BigPack::CsRequestAuth* requestauth);
+  ::BigPack::CsRequestAuth* unsafe_arena_release_requestauth();
+
+  // .BigPack.CsWheelEvent wheelEvent = 8;
+  bool has_wheelevent() const;
+  private:
+  bool _internal_has_wheelevent() const;
+  public:
+  void clear_wheelevent();
+  const ::BigPack::CsWheelEvent& wheelevent() const;
+  ::BigPack::CsWheelEvent* release_wheelevent();
+  ::BigPack::CsWheelEvent* mutable_wheelevent();
+  void set_allocated_wheelevent(::BigPack::CsWheelEvent* wheelevent);
+  private:
+  const ::BigPack::CsWheelEvent& _internal_wheelevent() const;
+  ::BigPack::CsWheelEvent* _internal_mutable_wheelevent();
+  public:
+  void unsafe_arena_set_allocated_wheelevent(
+      ::BigPack::CsWheelEvent* wheelevent);
+  ::BigPack::CsWheelEvent* unsafe_arena_release_wheelevent();
 
   // .BigPack.Exchange.DataType type = 1;
   void clear_type();
@@ -354,6 +403,8 @@ class Exchange PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr resourceid_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr targetid_;
+  ::BigPack::CsRequestAuth* requestauth_;
+  ::BigPack::CsWheelEvent* wheelevent_;
   int type_;
   ::PROTOBUF_NAMESPACE_ID::int32 errorcode_;
   union DataBodyUnion {
@@ -811,6 +862,273 @@ class ScReplyInfo PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Exchange_2eproto;
 };
+// -------------------------------------------------------------------
+
+class CsRequestAuth PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:BigPack.CsRequestAuth) */ {
+ public:
+  inline CsRequestAuth() : CsRequestAuth(nullptr) {}
+  ~CsRequestAuth() override;
+  explicit constexpr CsRequestAuth(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CsRequestAuth(const CsRequestAuth& from);
+  CsRequestAuth(CsRequestAuth&& from) noexcept
+    : CsRequestAuth() {
+    *this = ::std::move(from);
+  }
+
+  inline CsRequestAuth& operator=(const CsRequestAuth& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CsRequestAuth& operator=(CsRequestAuth&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const CsRequestAuth& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CsRequestAuth* internal_default_instance() {
+    return reinterpret_cast<const CsRequestAuth*>(
+               &_CsRequestAuth_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(CsRequestAuth& a, CsRequestAuth& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CsRequestAuth* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CsRequestAuth* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline CsRequestAuth* New() const final {
+    return CreateMaybeMessage<CsRequestAuth>(nullptr);
+  }
+
+  CsRequestAuth* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<CsRequestAuth>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const CsRequestAuth& from);
+  void MergeFrom(const CsRequestAuth& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CsRequestAuth* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "BigPack.CsRequestAuth";
+  }
+  protected:
+  explicit CsRequestAuth(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPasswordFieldNumber = 1,
+  };
+  // string password = 1;
+  void clear_password();
+  const std::string& password() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_password(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_password();
+  std::string* release_password();
+  void set_allocated_password(std::string* password);
+  private:
+  const std::string& _internal_password() const;
+  void _internal_set_password(const std::string& value);
+  std::string* _internal_mutable_password();
+  public:
+
+  // @@protoc_insertion_point(class_scope:BigPack.CsRequestAuth)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Exchange_2eproto;
+};
+// -------------------------------------------------------------------
+
+class CsWheelEvent PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:BigPack.CsWheelEvent) */ {
+ public:
+  inline CsWheelEvent() : CsWheelEvent(nullptr) {}
+  ~CsWheelEvent() override;
+  explicit constexpr CsWheelEvent(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CsWheelEvent(const CsWheelEvent& from);
+  CsWheelEvent(CsWheelEvent&& from) noexcept
+    : CsWheelEvent() {
+    *this = ::std::move(from);
+  }
+
+  inline CsWheelEvent& operator=(const CsWheelEvent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CsWheelEvent& operator=(CsWheelEvent&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const CsWheelEvent& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CsWheelEvent* internal_default_instance() {
+    return reinterpret_cast<const CsWheelEvent*>(
+               &_CsWheelEvent_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(CsWheelEvent& a, CsWheelEvent& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CsWheelEvent* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CsWheelEvent* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline CsWheelEvent* New() const final {
+    return CreateMaybeMessage<CsWheelEvent>(nullptr);
+  }
+
+  CsWheelEvent* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<CsWheelEvent>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const CsWheelEvent& from);
+  void MergeFrom(const CsWheelEvent& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CsWheelEvent* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "BigPack.CsWheelEvent";
+  }
+  protected:
+  explicit CsWheelEvent(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kDeltaposFieldNumber = 1,
+  };
+  // bool deltapos = 1;
+  void clear_deltapos();
+  bool deltapos() const;
+  void set_deltapos(bool value);
+  private:
+  bool _internal_deltapos() const;
+  void _internal_set_deltapos(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:BigPack.CsWheelEvent)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  bool deltapos_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Exchange_2eproto;
+};
 // ===================================================================
 
 
@@ -1098,6 +1416,172 @@ inline ::BigPack::ScReplyInfo* Exchange::mutable_replyinfo() {
   return _internal_mutable_replyinfo();
 }
 
+// .BigPack.CsRequestAuth requestAuth = 7;
+inline bool Exchange::_internal_has_requestauth() const {
+  return this != internal_default_instance() && requestauth_ != nullptr;
+}
+inline bool Exchange::has_requestauth() const {
+  return _internal_has_requestauth();
+}
+inline void Exchange::clear_requestauth() {
+  if (GetArena() == nullptr && requestauth_ != nullptr) {
+    delete requestauth_;
+  }
+  requestauth_ = nullptr;
+}
+inline const ::BigPack::CsRequestAuth& Exchange::_internal_requestauth() const {
+  const ::BigPack::CsRequestAuth* p = requestauth_;
+  return p != nullptr ? *p : reinterpret_cast<const ::BigPack::CsRequestAuth&>(
+      ::BigPack::_CsRequestAuth_default_instance_);
+}
+inline const ::BigPack::CsRequestAuth& Exchange::requestauth() const {
+  // @@protoc_insertion_point(field_get:BigPack.Exchange.requestAuth)
+  return _internal_requestauth();
+}
+inline void Exchange::unsafe_arena_set_allocated_requestauth(
+    ::BigPack::CsRequestAuth* requestauth) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(requestauth_);
+  }
+  requestauth_ = requestauth;
+  if (requestauth) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:BigPack.Exchange.requestAuth)
+}
+inline ::BigPack::CsRequestAuth* Exchange::release_requestauth() {
+  
+  ::BigPack::CsRequestAuth* temp = requestauth_;
+  requestauth_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::BigPack::CsRequestAuth* Exchange::unsafe_arena_release_requestauth() {
+  // @@protoc_insertion_point(field_release:BigPack.Exchange.requestAuth)
+  
+  ::BigPack::CsRequestAuth* temp = requestauth_;
+  requestauth_ = nullptr;
+  return temp;
+}
+inline ::BigPack::CsRequestAuth* Exchange::_internal_mutable_requestauth() {
+  
+  if (requestauth_ == nullptr) {
+    auto* p = CreateMaybeMessage<::BigPack::CsRequestAuth>(GetArena());
+    requestauth_ = p;
+  }
+  return requestauth_;
+}
+inline ::BigPack::CsRequestAuth* Exchange::mutable_requestauth() {
+  // @@protoc_insertion_point(field_mutable:BigPack.Exchange.requestAuth)
+  return _internal_mutable_requestauth();
+}
+inline void Exchange::set_allocated_requestauth(::BigPack::CsRequestAuth* requestauth) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete requestauth_;
+  }
+  if (requestauth) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(requestauth);
+    if (message_arena != submessage_arena) {
+      requestauth = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, requestauth, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  requestauth_ = requestauth;
+  // @@protoc_insertion_point(field_set_allocated:BigPack.Exchange.requestAuth)
+}
+
+// .BigPack.CsWheelEvent wheelEvent = 8;
+inline bool Exchange::_internal_has_wheelevent() const {
+  return this != internal_default_instance() && wheelevent_ != nullptr;
+}
+inline bool Exchange::has_wheelevent() const {
+  return _internal_has_wheelevent();
+}
+inline void Exchange::clear_wheelevent() {
+  if (GetArena() == nullptr && wheelevent_ != nullptr) {
+    delete wheelevent_;
+  }
+  wheelevent_ = nullptr;
+}
+inline const ::BigPack::CsWheelEvent& Exchange::_internal_wheelevent() const {
+  const ::BigPack::CsWheelEvent* p = wheelevent_;
+  return p != nullptr ? *p : reinterpret_cast<const ::BigPack::CsWheelEvent&>(
+      ::BigPack::_CsWheelEvent_default_instance_);
+}
+inline const ::BigPack::CsWheelEvent& Exchange::wheelevent() const {
+  // @@protoc_insertion_point(field_get:BigPack.Exchange.wheelEvent)
+  return _internal_wheelevent();
+}
+inline void Exchange::unsafe_arena_set_allocated_wheelevent(
+    ::BigPack::CsWheelEvent* wheelevent) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(wheelevent_);
+  }
+  wheelevent_ = wheelevent;
+  if (wheelevent) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:BigPack.Exchange.wheelEvent)
+}
+inline ::BigPack::CsWheelEvent* Exchange::release_wheelevent() {
+  
+  ::BigPack::CsWheelEvent* temp = wheelevent_;
+  wheelevent_ = nullptr;
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::BigPack::CsWheelEvent* Exchange::unsafe_arena_release_wheelevent() {
+  // @@protoc_insertion_point(field_release:BigPack.Exchange.wheelEvent)
+  
+  ::BigPack::CsWheelEvent* temp = wheelevent_;
+  wheelevent_ = nullptr;
+  return temp;
+}
+inline ::BigPack::CsWheelEvent* Exchange::_internal_mutable_wheelevent() {
+  
+  if (wheelevent_ == nullptr) {
+    auto* p = CreateMaybeMessage<::BigPack::CsWheelEvent>(GetArena());
+    wheelevent_ = p;
+  }
+  return wheelevent_;
+}
+inline ::BigPack::CsWheelEvent* Exchange::mutable_wheelevent() {
+  // @@protoc_insertion_point(field_mutable:BigPack.Exchange.wheelEvent)
+  return _internal_mutable_wheelevent();
+}
+inline void Exchange::set_allocated_wheelevent(::BigPack::CsWheelEvent* wheelevent) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete wheelevent_;
+  }
+  if (wheelevent) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(wheelevent);
+    if (message_arena != submessage_arena) {
+      wheelevent = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, wheelevent, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  wheelevent_ = wheelevent;
+  // @@protoc_insertion_point(field_set_allocated:BigPack.Exchange.wheelEvent)
+}
+
 inline bool Exchange::has_dataBody() const {
   return dataBody_case() != DATABODY_NOT_SET;
 }
@@ -1339,9 +1823,86 @@ inline void ScReplyInfo::set_allocated_registerid(std::string* registerid) {
   // @@protoc_insertion_point(field_set_allocated:BigPack.ScReplyInfo.registerId)
 }
 
+// -------------------------------------------------------------------
+
+// CsRequestAuth
+
+// string password = 1;
+inline void CsRequestAuth::clear_password() {
+  password_.ClearToEmpty();
+}
+inline const std::string& CsRequestAuth::password() const {
+  // @@protoc_insertion_point(field_get:BigPack.CsRequestAuth.password)
+  return _internal_password();
+}
+template <typename ArgT0, typename... ArgT>
+PROTOBUF_ALWAYS_INLINE
+inline void CsRequestAuth::set_password(ArgT0&& arg0, ArgT... args) {
+ 
+ password_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArena());
+  // @@protoc_insertion_point(field_set:BigPack.CsRequestAuth.password)
+}
+inline std::string* CsRequestAuth::mutable_password() {
+  // @@protoc_insertion_point(field_mutable:BigPack.CsRequestAuth.password)
+  return _internal_mutable_password();
+}
+inline const std::string& CsRequestAuth::_internal_password() const {
+  return password_.Get();
+}
+inline void CsRequestAuth::_internal_set_password(const std::string& value) {
+  
+  password_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline std::string* CsRequestAuth::_internal_mutable_password() {
+  
+  return password_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* CsRequestAuth::release_password() {
+  // @@protoc_insertion_point(field_release:BigPack.CsRequestAuth.password)
+  return password_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void CsRequestAuth::set_allocated_password(std::string* password) {
+  if (password != nullptr) {
+    
+  } else {
+    
+  }
+  password_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), password,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:BigPack.CsRequestAuth.password)
+}
+
+// -------------------------------------------------------------------
+
+// CsWheelEvent
+
+// bool deltapos = 1;
+inline void CsWheelEvent::clear_deltapos() {
+  deltapos_ = false;
+}
+inline bool CsWheelEvent::_internal_deltapos() const {
+  return deltapos_;
+}
+inline bool CsWheelEvent::deltapos() const {
+  // @@protoc_insertion_point(field_get:BigPack.CsWheelEvent.deltapos)
+  return _internal_deltapos();
+}
+inline void CsWheelEvent::_internal_set_deltapos(bool value) {
+  
+  deltapos_ = value;
+}
+inline void CsWheelEvent::set_deltapos(bool value) {
+  _internal_set_deltapos(value);
+  // @@protoc_insertion_point(field_set:BigPack.CsWheelEvent.deltapos)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
